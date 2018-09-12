@@ -15,6 +15,9 @@ public class Player {
 	//ArrayList<Card> playerHand = new ArrayList<Card>();
 	int score = 0;
 	
+	public Player() {
+		this.score = 0;
+	}
 	
 	
 	public int getScore() {

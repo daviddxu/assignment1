@@ -8,7 +8,7 @@ import java.util.Collections;
 /*
  * Dealer.java
  * Dealer deals cards to player and also plays
- * 
+ * Face down cards are excluded from score calculation until flipped.
  * 
  */
 public class Dealer {
@@ -19,14 +19,17 @@ public class Dealer {
 	int [] ranks = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 	String [] suits = {"S", "C", "D", "H"};	//S- Spades, C- Clubs, D- Diamonds, H- Hearts
 	
-	public void createDeck() {	//create a 52 card deck
-		Card card;
-		//Random rand = new Random();
+	
+	public Dealer() {
 		
-		//int rank;
-		//int points;
-
-		//String suit = null;
+		this.score = 0;
+		
+	}
+	
+	//public Dealer()
+	public void createDeck() {	//create a 52 card deck
+		
+		Card card;
 		
 		for(int i = 0; i < ranks.length; i++) {
 			
@@ -36,22 +39,11 @@ public class Dealer {
 			}
 		}
 		
-		Collections.shuffle(cards); //shuffle generated cards
-		
-		
-		
-	/*	for(int i = 0; i < 52; i++) {
-			rank = rand.nextInt(12-1)+1;
-			points = rank;
-		
-			card = new Card(rank, points, true, suit);
-			
-			cards.add(card);
-		}*/
+		Collections.shuffle(cards); //shuffle generated cards	
+
 	}
 	
-	/*** FOR TESTING createDeck() ONLY ***/
-	public int deckSize() {	
+	public int deckSize() {	//for testing createDeck() only
 		//return 0;
 		
 		return cards.size();
@@ -59,5 +51,9 @@ public class Dealer {
 	
 	public int getScore() {
 		return this.score;
+	}
+	
+	public void play() {
+		
 	}
 }
