@@ -15,7 +15,7 @@ public class Dealer {
 
 	ArrayList<Card> cards = new ArrayList<Card>();
 	ArrayList<Card> dealerCards = new ArrayList<Card>();
-	int handValue = 0;
+	int score = 0;
 	int [] ranks = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 	String [] suits = {"S", "C", "D", "H"};	//S- Spades, C- Clubs, D- Diamonds, H- Hearts
 	
@@ -57,4 +57,7 @@ public class Dealer {
 		return cards.size();
 	}
 	
+	public int getScore() {
+		return this.score;
+	}
 }
