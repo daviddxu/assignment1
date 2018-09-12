@@ -28,17 +28,22 @@ public class GameTest {
 	public void bustTest() {	//check if player has busted: exceeded 21 points
 		
 		/**NOT IMPLEMENTED**/
+		fail("Not yet implemented");
 
 	}
 	@Test
 	public void hitTest() {	//test player's hit: deal the player another card and check if player busts
 		
 		/**NOT IMPLEMENTED**/
+		fail("Not yet implemented");
+
 	}
 	
 	@Test
 	public void standTest() {	//test player's stand: mark all cards on table face up 
 		/**NOT IMPLEMENTED**/
+		fail("Not yet implemented");
+
 
 		
 	}
@@ -46,6 +51,8 @@ public class GameTest {
 	@Test
 	public void dealerPlayTest() {	//test dealer's play: if <= 16 points or a "soft 17", dealer hits otherwise stands
 		/**NOT IMPLEMENTED**/
+		fail("Not yet implemented");
+
 
 	}
 	
@@ -53,6 +60,8 @@ public class GameTest {
 	public void blackjackTest() {	//test blackjack checker function: if a player has an ace and 10, J, Q, K, they win; check dealer first then player; 
 		
 		/**NOT IMPLEMENTED**/
+		fail("Not yet implemented");
+
 
 	}
 	
