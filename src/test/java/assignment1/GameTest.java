@@ -16,6 +16,19 @@ public class GameTest {
 		fail("Not yet implemented");
 	}
 	
+	
+	@Test
+	public void deckGenTest() {	//test if a 52 card deck is generated
+		
+		//not implemented
+		//fail("Not yet implemented");
+		Dealer dealerTest = new Dealer();
+		dealerTest.createDeck();
+		assertEquals("Deck must have 52 cards", 52, dealerTest.deckSize());
+
+		
+		
+	}
 	@Test
 	public void dealTest() { //test dealer deal function: deal two cards to player and two to dealer
 		
