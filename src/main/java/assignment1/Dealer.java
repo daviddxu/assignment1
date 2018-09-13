@@ -13,7 +13,7 @@ import java.util.Collections;
  */
 public class Dealer {
 
-	ArrayList<Card> cards = new ArrayList<Card>();
+	ArrayList<Card> deck = new ArrayList<Card>();
 	ArrayList<Card> dealerCards = new ArrayList<Card>();
 	int score = 0;
 	int [] ranks = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
@@ -35,24 +35,56 @@ public class Dealer {
 			
 			for(int j = 0; j < suits.length; j++) {
 				card = new Card(ranks[i], ranks[i], true, suits[j]);
-				cards.add(card);
+				deck.add(card);
 			}
 		}
 		
-		Collections.shuffle(cards); //shuffle generated cards	
+		Collections.shuffle(deck); //shuffle generated cards	
 
 	}
 	
 	public int deckSize() {	//for testing createDeck() only
 		//return 0;
 		
-		return cards.size();
+		return deck.size();
 	}
 	
 	public int getScore() {
 		return this.score;
 	}
+
+	public ArrayList<Card> dealToPlayer() {	//deal two cards to the player; this function is only called at the start of a game
+		
+		ArrayList<Card> twoCards = new ArrayList<Card>();
+		
+		/*for(int i = 0; i< 2; i++) {
+			twoCards.add(deck.get(i));
+		}*/
+		
+		/*for(int j = 0; j < 2; j++) {
+			
+		}*/
+		
+		twoCards.add(deck.get(0));
+		deck.remove(0);
+		twoCards.add(deck.get(0));
+		deck.remove(0);
+		return twoCards;
+		
+	}
 	
+	public void dealToSelf() {
+		dealerCards.add(deck.get(0));
+		deck.remove(0);
+		deck.get(0).setFaceUp(false);
+		dealerCards.add(deck.get(0));
+		deck.remove(0);
+	}
+	
+	public int getDealerCardsSize() {
+		//return 0;
+		return dealerCards.size();
+	}
 	public void play() {
 		
 	}

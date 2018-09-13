@@ -30,11 +30,27 @@ public class GameTest {
 		
 	}
 	@Test
-	public void dealTest() { //test dealer deal function: deal two cards to player and two to dealer
+	public void dealToPlayerTest() { //test dealer deal to player function
 		
 		//not implemented
-		fail("Not yet implemented");
+	//	fail("Not yet implemented");
+		
+		Game game = new Game();
+		game.dealer = new Dealer();
+		game.player = new Player();
+		game.dealer.createDeck();
+		game.dealToPlayer();
+		assertEquals("Player must have two cards", 2, game.getPlayerCardsSize());
+	
 
+	}
+	
+	@Test
+	public void dealToSelfTest() {
+		Dealer dealer = new Dealer();
+		dealer.createDeck();
+		dealer.dealToSelf();
+		assertEquals("Dealer must have two cards", 2, dealer.getDealerCardsSize());
 	}
 	
 	@Test
