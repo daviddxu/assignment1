@@ -57,7 +57,24 @@ public class GameTest {
 	public void bustTest() {	//check if player has busted: exceeded 21 points
 		
 		/**NOT IMPLEMENTED**/
-		fail("Not yet implemented");
+	//	fail("Not yet implemented");
+		
+		Game game = new Game();
+		game.dealer = new Dealer();
+		Card c1 = new Card(11, 11, true, "D");
+		Card c2 = new Card(12, 12, true, "H");
+		game.dealer.deck.add(c1);
+		game.dealer.deck.add(c2);
+	//	game.player = new Player();
+
+		game.dealToPlayer();
+		//game.player.updateScore();
+		
+	//	game.bustCheck();
+		
+		assertEquals("Player has busted (23)", true, game.bustCheck());
+		
+		//game.
 
 	}
 	@Test

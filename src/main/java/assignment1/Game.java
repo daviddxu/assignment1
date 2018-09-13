@@ -19,6 +19,7 @@ public class Game {
 	public void dealToPlayer() {
 		
 		player.playerCards.addAll(dealer.dealToPlayer());
+		player.updateScore();
 		
 	}
 	
