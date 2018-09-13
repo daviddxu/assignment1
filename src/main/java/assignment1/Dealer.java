@@ -81,6 +81,14 @@ public class Dealer {
 		return newCard;
 	}
 	
+	public void stand() {
+		for(int i = 0; i < dealerCards.size(); i++) {
+			if(dealerCards.get(i).getFaceUp() == false) {
+				dealerCards.get(i).setFaceUp(true);
+			}
+		}
+	}
+	
 	public void dealToSelf() {
 		dealerCards.add(deck.get(0));
 		deck.remove(0);
@@ -93,6 +101,8 @@ public class Dealer {
 		//return 0;
 		return dealerCards.size();
 	}
+	
+	
 	public void play() {
 		
 	}

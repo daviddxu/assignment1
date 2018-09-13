@@ -31,6 +31,10 @@ public class Game {
 	//	bustCheck();
 	}
 	
+	public void stand() {
+		
+	}
+	
 	public int getPlayerCardsSize() {	//for testing dealToPlayer operation only
 		return player.playerCards.size();
 	}
