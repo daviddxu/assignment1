@@ -79,9 +79,6 @@ public class GameTest {
 	@Test
 	public void hitTest() {	//test player's hit: deal the player another card and check if player busts
 		
-		/**NOT IMPLEMENTED**/
-		//fail("Not yet implemented");
-		
 		Game game = new Game();
 		
 		game.dealer.createDeck();
@@ -95,8 +92,6 @@ public class GameTest {
 	
 	@Test
 	public void standTest() {	//test player's stand: mark all cards on table face up 
-		/**NOT IMPLEMENTED**/
-	//	fail("Not yet implemented");
 		
 		Game game = new Game();
 		
