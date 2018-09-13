@@ -57,13 +57,6 @@ public class Dealer {
 		
 		ArrayList<Card> twoCards = new ArrayList<Card>();
 		
-		/*for(int i = 0; i< 2; i++) {
-			twoCards.add(deck.get(i));
-		}*/
-		
-		/*for(int j = 0; j < 2; j++) {
-			
-		}*/
 		
 		twoCards.add(deck.get(0));
 		deck.remove(0);
@@ -73,7 +66,7 @@ public class Dealer {
 		
 	}
 	
-	public Card hit() {
+	public Card hit() {	//when player wants to hit
 		Card newCard = deck.get(0);
 		deck.remove(0);
 		System.out.println("There are " + deckSize() + " cards remaining in the deck.");
@@ -81,7 +74,7 @@ public class Dealer {
 		return newCard;
 	}
 	
-	public void stand() {
+	public void stand() {	//when player wants to stand
 		for(int i = 0; i < dealerCards.size(); i++) {
 			if(dealerCards.get(i).getFaceUp() == false) {
 				dealerCards.get(i).setFaceUp(true);
@@ -102,7 +95,25 @@ public class Dealer {
 		return dealerCards.size();
 	}
 	
+	public void updateScore() {
+		int newScore = 0;
+		
+		for(int i = 0; i < dealerCards.size(); i++) {
+			newScore += dealerCards.get(i).getPoints();
+		}
+		this.score = newScore;
+	}
 	
+	public boolean standTest() {
+		
+		
+		for(int i = 0; i < dealerCards.size(); i++) {
+			if(dealerCards.get(i).getFaceUp() == false) {
+				return false;
+			}
+		}
+		return true;
+	}
 	public void play() {
 		
 	}

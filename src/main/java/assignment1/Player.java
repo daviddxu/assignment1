@@ -26,7 +26,7 @@ public class Player {
 	
 	public void updateScore() {
 		
-		int newScore = score;
+		int newScore = 0;
 		for(int i = 0; i < playerCards.size(); i++) {
 			newScore += playerCards.get(i).getPoints();
 		}

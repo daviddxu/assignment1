@@ -96,7 +96,14 @@ public class GameTest {
 	@Test
 	public void standTest() {	//test player's stand: mark all cards on table face up 
 		/**NOT IMPLEMENTED**/
-		fail("Not yet implemented");
+	//	fail("Not yet implemented");
+		
+		Game game = new Game();
+		
+		game.dealer.createDeck();
+		game.dealToPlayer();
+		game.hit();
+		assertEquals("All of dealer's cards should be face up: ", true, game.dealer.standTest());
 
 
 		

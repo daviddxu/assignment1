@@ -32,6 +32,7 @@ public class Game {
 	}
 	
 	public void stand() {
+		dealer.stand();
 		
 	}
 	
