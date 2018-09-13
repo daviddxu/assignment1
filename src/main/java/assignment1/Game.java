@@ -11,31 +11,39 @@ public class Game {
 	
 	//ArrayList<Card> dealerPlay = new ArrayList<Card>();
 	//ArrayList<Card> player = new ArrayList<Card>();
+	
 	Dealer dealer = new Dealer();
 	Player player = new Player();
 	
-	
+
 	
 	public void dealToPlayer() {
 		
 		player.playerCards.addAll(dealer.dealToPlayer());
 		player.updateScore();
+		//System.out.println("player's score: " + player.getScore());
 		
+	}
+	
+	public void hit() {
+		player.playerCards.add(dealer.hit());
+		player.updateScore();
+	//	bustCheck();
 	}
 	
 	public int getPlayerCardsSize() {	//for testing dealToPlayer operation only
 		return player.playerCards.size();
 	}
-	public int bustCheck() {
+	/*public int bustCheck() {
 		
 		int flag = 0; //return 1 for player bust, 2 for dealer bust
 		
 		
 		
 		return flag;
-	}
+	}*/
 	
-	public boolean bustTest() {	//check if player or dealer (in that order) has busted and return accordingly
+	public boolean bustCheck() {	//check if player or dealer (in that order) has busted and return accordingly
 		
 		if(player.getScore() > 21) {
 			return true;

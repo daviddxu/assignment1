@@ -36,8 +36,8 @@ public class GameTest {
 	//	fail("Not yet implemented");
 		
 		Game game = new Game();
-		game.dealer = new Dealer();
-		game.player = new Player();
+		//game.dealer = new Dealer();
+		//game.player = new Player();
 		game.dealer.createDeck();
 		game.dealToPlayer();
 		assertEquals("Player must have two cards", 2, game.getPlayerCardsSize());
@@ -56,11 +56,10 @@ public class GameTest {
 	@Test
 	public void bustTest() {	//check if player has busted: exceeded 21 points
 		
-		/**NOT IMPLEMENTED**/
 	//	fail("Not yet implemented");
 		
 		Game game = new Game();
-		game.dealer = new Dealer();
+		//game.dealer = new Dealer();
 		Card c1 = new Card(11, 11, true, "D");
 		Card c2 = new Card(12, 12, true, "H");
 		game.dealer.deck.add(c1);
@@ -71,7 +70,7 @@ public class GameTest {
 		//game.player.updateScore();
 		
 	//	game.bustCheck();
-		
+		System.out.println("Player's score: " + game.player.getScore() );
 		assertEquals("Player has busted (23)", true, game.bustCheck());
 		
 		//game.
@@ -81,7 +80,16 @@ public class GameTest {
 	public void hitTest() {	//test player's hit: deal the player another card and check if player busts
 		
 		/**NOT IMPLEMENTED**/
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
+		
+		Game game = new Game();
+		
+		game.dealer.createDeck();
+		game.dealToPlayer();
+	//	game.dealer.dealToSelf();
+		game.hit();
+		assertEquals("Player should have 3 cards", 3, game.player.playerCards.size());
+		
 
 	}
 	

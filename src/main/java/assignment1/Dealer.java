@@ -73,6 +73,14 @@ public class Dealer {
 		
 	}
 	
+	public Card hit() {
+		Card newCard = deck.get(0);
+		deck.remove(0);
+		System.out.println("There are " + deckSize() + " cards remaining in the deck.");
+		
+		return newCard;
+	}
+	
 	public void dealToSelf() {
 		dealerCards.add(deck.get(0));
 		deck.remove(0);
