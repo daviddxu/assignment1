@@ -9,35 +9,21 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class GameTest {
-
-	/*@Test
-	public void test() {
-		fail("Not yet implemented");
-	}*/
-	
+public class GameTest {	
 	
 	@Test
 	public void deckGenTest() {	//test if a 52 card deck is generated
 		
-		//not implemented
-		//fail("Not yet implemented");
 		Dealer dealerTest = new Dealer();
 		dealerTest.createDeck();
 		assertEquals("Deck must have 52 cards", 52, dealerTest.deckSize());
-
-		
 		
 	}
+	
 	@Test
 	public void dealToPlayerTest() { //test dealer deal to player function
 		
-		//not implemented
-	//	fail("Not yet implemented");
-		
 		Game game = new Game();
-		//game.dealer = new Dealer();
-		//game.player = new Player();
 		game.dealer.createDeck();
 		game.dealToPlayer();
 		assertEquals("Player must have two cards", 2, game.getPlayerCardsSize());
@@ -56,34 +42,25 @@ public class GameTest {
 	@Test
 	public void bustTest() {	//check if player has busted: exceeded 21 points
 		
-	//	fail("Not yet implemented");
-		
 		Game game = new Game();
-		//game.dealer = new Dealer();
 		Card c1 = new Card(11, 11, true, "D");
 		Card c2 = new Card(12, 12, true, "H");
 		game.dealer.deck.add(c1);
 		game.dealer.deck.add(c2);
-	//	game.player = new Player();
-
 		game.dealToPlayer();
-		//game.player.updateScore();
-		
-	//	game.bustCheck();
 		System.out.println("Player's score: " + game.player.getScore() );
 		assertEquals("Player has busted (23)", true, game.bustCheck());
 		
-		//game.
 
 	}
+	
 	@Test
 	public void hitTest() {	//test player's hit: deal the player another card and check if player busts
 		
 		Game game = new Game();
 		
 		game.dealer.createDeck();
-		game.dealToPlayer();
-	//	game.dealer.dealToSelf();
+		game.dealToPlayer();	
 		game.hit();
 		assertEquals("Player should have 3 cards", 3, game.player.playerCards.size());
 		
@@ -106,9 +83,7 @@ public class GameTest {
 	
 	@Test
 	public void dealerHitTest() {	//test dealer's play: if <= 16 points or a "soft 17", dealer hits otherwise stands
-		/**NOT IMPLEMENTED**/
-	//	fail("Not yet implemented");
-
+		
 		Game game = new Game();
 		Card c1 = new Card(1, 1, false, "D");
 		Card c2 = new Card(6, 6, true, "H");
@@ -132,13 +107,10 @@ public class GameTest {
 
 		Game game = new Game();
 		Card c1 = new Card(1, 1, true, "S");
-		Card c2 = new Card(10, 10, true, "H");
-		
+		Card c2 = new Card(10, 10, true, "H");		
 		game.dealer.deck.add(c1);
-		game.dealer.deck.add(c2);
-		
-		game.dealToPlayer();
-		
+		game.dealer.deck.add(c2);		
+		game.dealToPlayer();		
 		assertEquals("The player should have blackjack (2)", 2, game.blackJackTest());
 	}
 	

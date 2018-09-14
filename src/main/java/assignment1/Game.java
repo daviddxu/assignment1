@@ -7,10 +7,6 @@ import java.util.ArrayList;
  * Dealer's face down card is excluded from score calculation
  */
 public class Game {
-
-	
-	//ArrayList<Card> dealerPlay = new ArrayList<Card>();
-	//ArrayList<Card> player = new ArrayList<Card>();
 	
 	Dealer dealer = new Dealer();
 	Player player = new Player();
@@ -21,14 +17,13 @@ public class Game {
 		
 		player.playerCards.addAll(dealer.dealToPlayer());
 		player.updateScore();
-		//System.out.println("player's score: " + player.getScore());
 		
 	}
 	
 	public void hit() {
 		player.playerCards.add(dealer.hit());
 		player.updateScore();
-	//	bustCheck();
+	
 	}
 	
 	public void dealerHit() {
@@ -46,14 +41,7 @@ public class Game {
 	public int getPlayerCardsSize() {	//for testing dealToPlayer operation only
 		return player.playerCards.size();
 	}
-	/*public int bustCheck() {
-		
-		int flag = 0; //return 1 for player bust, 2 for dealer bust
-		
-		
-		
-		return flag;
-	}*/
+
 	
 	public boolean bustCheck() {	//check if player or dealer (in that order) has busted and return accordingly
 		
@@ -69,8 +57,7 @@ public class Game {
 	
 	public boolean aceCheck() {	//check if player and dealer will bust if an ace's points are set to 11; called if player or dealer is dealt an Ace or if the dealer flips up an Ace
 		
-		//int dealerScoreTemp = dealer.getScore();
-		//int playerScoreTemp = player.getScore();
+		
 		for(int i = 0; i < dealer.dealerCards.size(); i++) {
 			if(dealer.dealerCards.get(i).getRank() == 1) {
 				if(dealer.getScore() + 11 <= 21) {	//if dealer score is favoured by Ace being worth 11  
@@ -96,13 +83,13 @@ public class Game {
 	
 	public int blackJackTest() {	//return 0 if n/a, 1 if dealer wins and 2 if player wins; check dealer first
 		
-		int aceFlag = 0;
+	/*	int aceFlag = 0;
 		int faceFlag = 0;
 		int tenFlag = 0;
-		
+	*/	
 		for(int i = 0 ; i < dealer.dealerCards.size(); i++) {	//check if the player has an Ace and 10, 11, 12, 13
 				if(dealer.dealerCards.get(i).getRank() == 1) {
-					aceFlag = 1;
+			//		aceFlag = 1;
 					for(int j = 0; j < dealer.dealerCards.size(); j++) {
 						if(dealer.dealerCards.get(j).getRank() == 10 || dealer.dealerCards.get(i).getRank() == 11 || dealer.dealerCards.get(i).getRank() == 12 || dealer.dealerCards.get(i).getRank() == 13) {
 							return 1;
@@ -111,7 +98,7 @@ public class Game {
 				}
 				
 				else if(dealer.dealerCards.get(i).getRank() == 10 || dealer.dealerCards.get(i).getRank() == 11 || dealer.dealerCards.get(i).getRank() == 12 || dealer.dealerCards.get(i).getRank() == 13) {
-					tenFlag = 1;
+		//			tenFlag = 1;
 					
 					for(int k = 0; k < dealer.dealerCards.size(); k++) {
 						if(dealer.dealerCards.get(k).getRank() == 1) {
@@ -147,6 +134,11 @@ public class Game {
 	
 		public static void main (String [] args) {
 			
-			System.out.println("Hello");
+			//System.out.println("Hello");
+			
+			Game game = new Game();
+			
+			System.out.println("Press (1) for console input, (2) for file input");
+			
 		}
 }

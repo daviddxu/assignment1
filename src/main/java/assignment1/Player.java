@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Player {
 
 	ArrayList<Card> playerCards = new ArrayList<Card>();
-	//ArrayList<Card> playerHand = new ArrayList<Card>();
 	int score = 0;
 	
 	public Player() {

@@ -26,13 +26,12 @@ public class Dealer {
 		
 	}
 	
-	//public Dealer()
+	
 	public void createDeck() {	//create a 52 card deck
 		
 		Card card;
 		
-		for(int i = 0; i < ranks.length; i++) {
-			
+		for(int i = 0; i < ranks.length; i++) {			
 			for(int j = 0; j < suits.length; j++) {
 				card = new Card(ranks[i], ranks[i], true, suits[j]);
 				deck.add(card);
@@ -75,11 +74,7 @@ public class Dealer {
 	}
 	
 	public void stand() {	//when player wants to stand
-		/*for(int i = 0; i < dealerCards.size(); i++) {
-			if(dealerCards.get(i).getFaceUp() == false) {
-				dealerCards.get(i).setFaceUp(true);
-			}
-		}*/
+
 		flipCard();
 	}
 	
@@ -114,8 +109,7 @@ public class Dealer {
 	}
 	
 	public boolean standTest() {
-		
-		
+				
 		for(int i = 0; i < dealerCards.size(); i++) {
 			if(dealerCards.get(i).getFaceUp() == false) {
 				return false;
