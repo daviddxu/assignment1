@@ -116,12 +116,10 @@ public class GameTest {
 		game.dealer.deck.add(c1);
 		game.dealer.deck.add(c2);
 		game.dealer.deck.add(c3);
-		
 		game.dealer.dealerCards.add(game.dealer.deck.get(0));
 		game.dealer.deck.remove(0);
 		game.dealer.dealerCards.add(game.dealer.deck.get(0));
 		game.dealer.deck.remove(0);
-		
 		game.dealerHit();
 		assertEquals("The dealer should now have three cards", 3, game.dealer.dealerCards.size());
 		
@@ -131,8 +129,6 @@ public class GameTest {
 	@Test
 	public void blackjackTest() {	//test blackjack checker function: if a player has an ace and 10, J, Q, K, they win; check dealer first then player; 
 		
-		/**NOT IMPLEMENTED**/
-		//fail("Not yet implemented");
 
 		Game game = new Game();
 		Card c1 = new Card(1, 1, true, "S");
@@ -144,6 +140,20 @@ public class GameTest {
 		game.dealToPlayer();
 		
 		assertEquals("The player should have blackjack (2)", 2, game.blackJackTest());
+	}
+	
+	@Test
+	public void dealerBlackJackTest() {	//test blackjack for dealer
+		
+		Game game = new Game();
+		Card c1 = new Card(1, 1, true, "S");
+		Card c2 = new Card(10, 10, true, "H");
+		game.dealer.deck.add(c1);
+		game.dealer.deck.add(c2);
+		game.dealer.dealToSelf();
+		assertEquals("The dealer should have blackjack (1)", 1, game.blackJackTest());
+		
+		
 	}
 	
 
