@@ -1,5 +1,6 @@
 package assignment1;
 
+import java.util.Scanner;
 import java.util.ArrayList;
 /*
  * Game.java (BlackJack)
@@ -137,8 +138,15 @@ public class Game {
 			//System.out.println("Hello");
 			
 			Game game = new Game();
-			
+			Scanner input = new Scanner(System.in);
+			int choice = 0;
 			System.out.println("Press (1) for console input, (2) for file input");
-			
+			choice = input.nextInt();
+			if(choice == 1) {	//console input
+				
+			}else if (choice == 2) {	//file input
+				/*PLACEHOLDER*/
+				System.out.println("NOT IMPLEMENTED");
+			}
 		}
 }
