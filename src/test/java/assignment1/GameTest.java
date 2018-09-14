@@ -132,8 +132,10 @@ public class GameTest {
 	public void blackjackTest() {	//test blackjack checker function: if a player has an ace and 10, J, Q, K, they win; check dealer first then player; 
 		
 		/**NOT IMPLEMENTED**/
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 
+		Game game = new Game();
+		Card c1 = new Card();
 
 	}
 	

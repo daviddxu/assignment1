@@ -91,7 +91,41 @@ public class Game {
 		
 		return false;
 		
+		
+}
+	
+	public int blackJackTest() {	//return 0 if n/a, 1 if dealer wins and 2 if player wins; check dealer first
+		
+		int aceFlag = 0;
+		int faceFlag = 0;
+		int tenFlag = 0;
+		
+		for(int i = 0 ; i < dealer.dealerCards.size(); i++) {	//check if the player has an Ace and 10, 11, 12, 13
+				if(dealer.dealerCards.get(i).getRank() == 1) {
+					aceFlag = 1;
+					for(int j = 0; j < dealer.dealerCards.size(); j++) {
+						if(dealer.dealerCards.get(j).getRank() == 10 || dealer.dealerCards.get(i).getRank() == 11 || dealer.dealerCards.get(i).getRank() == 12 || dealer.dealerCards.get(i).getRank() == 13) {
+							return 1;
+						}
+					}
+				}
+				
+				else if(dealer.dealerCards.get(i).getRank() == 10 || dealer.dealerCards.get(i).getRank() == 11 || dealer.dealerCards.get(i).getRank() == 12 || dealer.dealerCards.get(i).getRank() == 13) {
+					tenFlag = 1;
+					
+					for(int k = 0; k < dealer.dealerCards.size(); k++) {
+						if(dealer.dealerCards.get(k).getRank() == 1) {
+							return 1;
+						}
+					}
+				}
+		}
+		
+		
+		
+		return 0;
 	}
+	
 		public static void main (String [] args) {
 			
 			System.out.println("Hello");
