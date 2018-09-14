@@ -135,8 +135,15 @@ public class GameTest {
 		//fail("Not yet implemented");
 
 		Game game = new Game();
-		Card c1 = new Card();
-
+		Card c1 = new Card(1, 1, true, "S");
+		Card c2 = new Card(10, 10, true, "H");
+		
+		game.dealer.deck.add(c1);
+		game.dealer.deck.add(c2);
+		
+		game.dealToPlayer();
+		
+		assertEquals("The player should have blackjack (2)", 2, game.blackJackTest());
 	}
 	
 

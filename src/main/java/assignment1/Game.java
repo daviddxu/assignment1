@@ -122,6 +122,25 @@ public class Game {
 		}
 		
 		
+		for(int i = 0; i < player.playerCards.size(); i++) {
+			if(player.playerCards.get(i).getRank() == 1) {
+				for(int j = 0; j < player.playerCards.size(); j++) {
+					if(player.playerCards.get(j).getRank()==10 || player.playerCards.get(j).getRank() == 11 || player.playerCards.get(j).getRank() == 12 || player.playerCards.get(j).getRank() == 13) {
+						return 2;
+					}
+				}
+			}
+			
+			else if(player.playerCards.get(i).getRank() == 10 || player.playerCards.get(i).getRank() == 11 || player.playerCards.get(i).getRank() == 12 || player.playerCards.get(i).getRank() == 13) {
+					for(int k = 0; k < player.playerCards.size(); k++) {
+						if(dealer.dealerCards.get(k).getRank()==1) {
+							return 2;
+						}
+					}
+			}
+		}
+		
+		
 		
 		return 0;
 	}
