@@ -31,8 +31,15 @@ public class Game {
 	//	bustCheck();
 	}
 	
+	public void dealerHit() {
+		dealer.flipCard();
+		aceCheck();
+		dealer.dealerCards.add(dealer.hit());
+		dealer.updateScore();
+	}
 	public void stand() {
 		dealer.stand();
+		aceCheck();
 		
 	}
 	

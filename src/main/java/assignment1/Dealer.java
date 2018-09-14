@@ -66,7 +66,7 @@ public class Dealer {
 		
 	}
 	
-	public Card hit() {	//when player wants to hit
+	public Card hit() {	//when player or dealer wants to hit
 		Card newCard = deck.get(0);
 		deck.remove(0);
 		System.out.println("There are " + deckSize() + " cards remaining in the deck.");
@@ -75,11 +75,12 @@ public class Dealer {
 	}
 	
 	public void stand() {	//when player wants to stand
-		for(int i = 0; i < dealerCards.size(); i++) {
+		/*for(int i = 0; i < dealerCards.size(); i++) {
 			if(dealerCards.get(i).getFaceUp() == false) {
 				dealerCards.get(i).setFaceUp(true);
 			}
-		}
+		}*/
+		flipCard();
 	}
 	
 	public void dealToSelf() {
@@ -88,6 +89,14 @@ public class Dealer {
 		deck.get(0).setFaceUp(false);
 		dealerCards.add(deck.get(0));
 		deck.remove(0);
+	}
+	
+	public void flipCard() {	//flip dealer's face down card
+		for(int i = 0; i < dealerCards.size(); i++) {
+			if(dealerCards.get(i).getFaceUp() == false) {
+				dealerCards.get(i).setFaceUp(true);
+			}
+		}
 	}
 	
 	public int getDealerCardsSize() {
