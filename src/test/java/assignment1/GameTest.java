@@ -49,7 +49,7 @@ public class GameTest {
 		game.dealer.deck.add(c2);
 		game.dealToPlayer();
 		System.out.println("Player's score: " + game.player.getScore() );
-		assertEquals("Player has busted (23)", true, game.bustCheck());
+		assertEquals("Player has busted (23) (return 1)", 1, game.bustCheck());
 		
 
 	}
@@ -136,6 +136,19 @@ public class GameTest {
 		String rank = "A";
 		
 		assertEquals("genPoints should return 1", 1, game.dealer.genPoints(rank));
+	}
+	
+	@Test
+	public void softCheckTest() {	//test game.softCheck
+			Game game = new Game();
+			Card c1 = new Card("A", 11, true, "S");
+			Card c2 = new Card("6", 6, true, "D");
+			game.dealer.deck.add(c1);
+			game.dealer.deck.add(c2);
+			game.dealer.dealToSelf();
+			game.dealer.updateScore();
+			assertEquals("game.softCheck() should return true", true, game.softCheck());
+			
 	}
 
 }

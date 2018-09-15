@@ -72,12 +72,12 @@ public class Dealer {
 	public Card hit() {	//when player or dealer wants to hit
 		Card newCard = deck.get(0);
 		deck.remove(0);
-		System.out.println("There are " + deckSize() + " cards remaining in the deck.");
+		//System.out.println("There are " + deckSize() + " cards remaining in the deck.");
 		
 		return newCard;
 	}
 	
-	public void stand() {	//when player wants to stand
+	public void stand() {	//when a player wants to stand
 
 		flipCard();
 	}
@@ -96,6 +96,7 @@ public class Dealer {
 				dealerCards.get(i).setFaceUp(true);
 			}
 		}
+		updateScore();
 	}
 	
 	public int getDealerCardsSize() {
@@ -107,7 +108,10 @@ public class Dealer {
 		int newScore = 0;
 		
 		for(int i = 0; i < dealerCards.size(); i++) {
-			newScore += dealerCards.get(i).getPoints();
+			
+			if(dealerCards.get(i).getFaceUp() == true) {
+				newScore += dealerCards.get(i).getPoints();
+			}
 		}
 		this.score = newScore;
 	}
