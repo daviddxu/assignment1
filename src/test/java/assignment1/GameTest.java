@@ -43,8 +43,8 @@ public class GameTest {
 	public void bustTest() {	//check if player has busted: exceeded 21 points
 		
 		Game game = new Game();
-		Card c1 = new Card(11, 11, true, "D");
-		Card c2 = new Card(12, 12, true, "H");
+		Card c1 = new Card("J", 11, true, "D");
+		Card c2 = new Card("Q", 12, true, "H");
 		game.dealer.deck.add(c1);
 		game.dealer.deck.add(c2);
 		game.dealToPlayer();
@@ -85,9 +85,9 @@ public class GameTest {
 	public void dealerHitTest() {	//test dealer's play: if <= 16 points or a "soft 17", dealer hits otherwise stands
 		
 		Game game = new Game();
-		Card c1 = new Card(1, 1, false, "D");
-		Card c2 = new Card(6, 6, true, "H");
-		Card c3 = new Card(2, 2, true, "S");
+		Card c1 = new Card("A", 1, false, "D");
+		Card c2 = new Card("6", 6, true, "H");
+		Card c3 = new Card("2", 2, true, "S");
 		game.dealer.deck.add(c1);
 		game.dealer.deck.add(c2);
 		game.dealer.deck.add(c3);
@@ -106,8 +106,8 @@ public class GameTest {
 		
 
 		Game game = new Game();
-		Card c1 = new Card(1, 1, true, "S");
-		Card c2 = new Card(10, 10, true, "H");		
+		Card c1 = new Card("A", 1, true, "S");
+		Card c2 = new Card("10", 10, true, "H");		
 		game.dealer.deck.add(c1);
 		game.dealer.deck.add(c2);		
 		game.dealToPlayer();		
@@ -118,8 +118,8 @@ public class GameTest {
 	public void dealerBlackJackTest() {	//test blackjack for dealer
 		
 		Game game = new Game();
-		Card c1 = new Card(1, 1, true, "S");
-		Card c2 = new Card(10, 10, true, "H");
+		Card c1 = new Card("A", 1, true, "S");
+		Card c2 = new Card("10", 10, true, "H");
 		game.dealer.deck.add(c1);
 		game.dealer.deck.add(c2);
 		game.dealer.dealToSelf();
@@ -128,5 +128,14 @@ public class GameTest {
 		
 	}
 	
+	@Test 
+	public void genPointsTest() {	//test genPoints function in Dealer
+		
+		Game game = new Game();
+		//Card c1 = new Card("A", 1, true)
+		String rank = "A";
+		
+		assertEquals("genPoints should return 1", 1, game.dealer.genPoints(rank));
+	}
 
 }

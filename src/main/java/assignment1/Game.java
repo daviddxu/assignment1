@@ -60,7 +60,7 @@ public class Game {
 		
 		
 		for(int i = 0; i < dealer.dealerCards.size(); i++) {
-			if(dealer.dealerCards.get(i).getRank() == 1) {
+			if(dealer.dealerCards.get(i).getRank().compareTo("A")==0) {
 				if(dealer.getScore() + 11 <= 21) {	//if dealer score is favoured by Ace being worth 11  
 					dealer.dealerCards.get(i).setPoints(11);
 					return true;
@@ -69,7 +69,7 @@ public class Game {
 		}
 		
 		for(int j = 0; j < player.playerCards.size(); j++) {
-			if(player.playerCards.get(j).getRank() == 1) {
+			if(player.playerCards.get(j).getRank().compareTo("A") == 0) {
 				if(player.getScore() + 11 <= 21) {	//if dealer score is favoured by Ace being worth 11  
 					player.playerCards.get(j).setPoints(11);
 					return true;
@@ -89,20 +89,20 @@ public class Game {
 		int tenFlag = 0;
 	*/	
 		for(int i = 0 ; i < dealer.dealerCards.size(); i++) {	//check if the player has an Ace and 10, 11, 12, 13
-				if(dealer.dealerCards.get(i).getRank() == 1) {
+				if(dealer.dealerCards.get(i).getRank().compareTo("A")==0) {
 			//		aceFlag = 1;
 					for(int j = 0; j < dealer.dealerCards.size(); j++) {
-						if(dealer.dealerCards.get(j).getRank() == 10 || dealer.dealerCards.get(i).getRank() == 11 || dealer.dealerCards.get(i).getRank() == 12 || dealer.dealerCards.get(i).getRank() == 13) {
+						if(dealer.dealerCards.get(j).getRank().compareTo("10") == 0 || dealer.dealerCards.get(j).getRank().compareTo("J") == 0 || dealer.dealerCards.get(j).getRank().compareTo("Q") == 0  || dealer.dealerCards.get(j).getRank().compareTo("K") == 0 ) {
 							return 1;
 						}
 					}
 				}
 				
-				else if(dealer.dealerCards.get(i).getRank() == 10 || dealer.dealerCards.get(i).getRank() == 11 || dealer.dealerCards.get(i).getRank() == 12 || dealer.dealerCards.get(i).getRank() == 13) {
+				else if(dealer.dealerCards.get(i).getRank().compareTo("10") == 0 || dealer.dealerCards.get(i).getRank().compareTo("J") == 0 || dealer.dealerCards.get(i).getRank().compareTo("Q") == 0  || dealer.dealerCards.get(i).getRank().compareTo("K") == 0 ) {
 		//			tenFlag = 1;
 					
 					for(int k = 0; k < dealer.dealerCards.size(); k++) {
-						if(dealer.dealerCards.get(k).getRank() == 1) {
+						if(dealer.dealerCards.get(k).getRank().compareTo("A")==0) {
 							return 1;
 						}
 					}
@@ -111,17 +111,17 @@ public class Game {
 		
 		
 		for(int i = 0; i < player.playerCards.size(); i++) {
-			if(player.playerCards.get(i).getRank() == 1) {
+			if(player.playerCards.get(i).getRank().compareTo("A")==0) {
 				for(int j = 0; j < player.playerCards.size(); j++) {
-					if(player.playerCards.get(j).getRank()==10 || player.playerCards.get(j).getRank() == 11 || player.playerCards.get(j).getRank() == 12 || player.playerCards.get(j).getRank() == 13) {
+					if(player.playerCards.get(j).getRank().compareTo("10")==0|| player.playerCards.get(j).getRank().compareTo("J")==0 || player.playerCards.get(j).getRank().compareTo("Q")==0 ||  player.playerCards.get(j).getRank().compareTo("K")==0 ) {
 						return 2;
 					}
 				}
 			}
 			
-			else if(player.playerCards.get(i).getRank() == 10 || player.playerCards.get(i).getRank() == 11 || player.playerCards.get(i).getRank() == 12 || player.playerCards.get(i).getRank() == 13) {
+			else if(player.playerCards.get(i).getRank().compareTo("10")==0|| player.playerCards.get(i).getRank().compareTo("J")==0 || player.playerCards.get(i).getRank().compareTo("Q")==0 ||  player.playerCards.get(i).getRank().compareTo("K")==0 ) {
 					for(int k = 0; k < player.playerCards.size(); k++) {
-						if(dealer.dealerCards.get(k).getRank()==1) {
+						if(dealer.dealerCards.get(k).getRank().compareTo("A")==0) {
 							return 2;
 						}
 					}
@@ -143,6 +143,26 @@ public class Game {
 			System.out.println("Press (1) for console input, (2) for file input");
 			choice = input.nextInt();
 			if(choice == 1) {	//console input
+				
+				game.dealer.createDeck();
+				game.dealToPlayer();
+				game.dealer.dealToSelf();
+				
+				System.out.println("Player's cards: " );
+				for(int i = 0; i < game.getPlayerCardsSize(); i++) {
+					System.out.print(game.player.playerCards.get(i).getRank() + "" + game.player.playerCards.get(i).getSuit() + " ");
+				}
+				System.out.println("");
+				System.out.println("Dealer's cards: ");
+				for(int i = 0; i < game.dealer.dealerCards.size(); i++) {
+					if(game.dealer.dealerCards.get(i).getFaceUp() == true) {
+					System.out.println(game.dealer.dealerCards.get(i).getRank() + "" + game.dealer.dealerCards.get(i).getSuit());
+					}
+				}
+				
+				String play = null;
+								
+				
 				
 			}else if (choice == 2) {	//file input
 				/*PLACEHOLDER*/

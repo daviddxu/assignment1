@@ -16,8 +16,10 @@ public class Dealer {
 	ArrayList<Card> deck = new ArrayList<Card>();
 	ArrayList<Card> dealerCards = new ArrayList<Card>();
 	int score = 0;
-	int [] ranks = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+//	int [] ranks = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+	String [] ranks =  {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 	String [] suits = {"S", "C", "D", "H"};	//S- Spades, C- Clubs, D- Diamonds, H- Hearts
+ 
 	
 	
 	public Dealer() {
@@ -30,10 +32,12 @@ public class Dealer {
 	public void createDeck() {	//create a 52 card deck
 		
 		Card card;
-		
+		int points = 0;
 		for(int i = 0; i < ranks.length; i++) {			
 			for(int j = 0; j < suits.length; j++) {
-				card = new Card(ranks[i], ranks[i], true, suits[j]);
+				
+				points = genPoints(ranks[i]);
+				card = new Card(ranks[i], points  , true, suits[j]);
 				deck.add(card);
 			}
 		}
@@ -116,6 +120,56 @@ public class Dealer {
 			}
 		}
 		return true;
+	}
+	
+	public int genPoints(String rank) {	//convert ranks (string) to points (int)
+		
+		
+		if(rank.compareTo("A") == 0) {
+			return 1;
+		}
+		else if(rank.compareTo("2")==0) {
+			return 2;
+		}
+		if(rank.compareTo("3") == 0) {
+			return 3;
+		}
+		else if(rank.compareTo("4")==0) {
+			return 4;
+		}
+		if(rank.compareTo("5") == 0) {
+			return 5;
+		}
+		else if(rank.compareTo("6")==0) {
+			return 6;
+		}
+		if(rank.compareTo("7") == 0) {
+			return 7;
+		}
+		else if(rank.compareTo("8")==0) {
+			return 8;
+		}
+		if(rank.compareTo("9") == 0) {
+			return 9;
+		}
+		else if(rank.compareTo("10")==0) {
+			return 10;
+		}
+		if(rank.compareTo("J") == 0) {
+			return 11;
+		}
+		else if(rank.compareTo("Q")==0) {
+			return 12;
+		}
+		if(rank.compareTo("K") == 0) {
+			return 13;
+		}else {
+			return -1;	//failure case
+		}
+		 
+		
+		 
+		
 	}
 	public void play() {
 		

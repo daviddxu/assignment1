@@ -9,7 +9,8 @@ package assignment1;
 
 public class Card {
 	
-	int rank;	//must be between 1-12 (11: Jack, 12: Queen, 13: King)
+	//int rank;	//must be between 1-12 (11: Jack, 12: Queen, 13: King)
+	String rank;
 	int points;
 	String suit;
 	boolean faceup;
@@ -17,7 +18,7 @@ public class Card {
 		
 	}
 
-	public Card(int rank, int points, boolean faceup, String suit) {
+	public Card(String rank, int points, boolean faceup, String suit) {
 		
 		this.rank = rank;
 		this.points = points;
@@ -25,11 +26,11 @@ public class Card {
 		this.suit = suit;
 	}
 	
-	public int getRank() {
+	public String getRank() {
 		return rank;
 	}
 	
-	public void setRank(int rank) {
+	public void setRank(String rank) {
 		
 		this.rank = rank;
 	}
