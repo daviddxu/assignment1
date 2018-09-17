@@ -46,9 +46,20 @@ public class Dealer {
 
 	}
 	
-	public int deckSize() {	//for testing createDeck() only
-		//return 0;
+	public void createUnshuffledDeck() {	//create an unshuffled 52 card deck *FOR TESTING PURPOSES ONLY*
 		
+		Card card;
+		int points = 0;
+		for(int i = 0; i <ranks.length; i++) {
+			for(int j = 0; j<suits.length; j++) {
+				points = genPoints(ranks[i]);
+				card = new Card(ranks[i], points, true, suits[j]);
+				deck.add(card);
+			}
+		}
+	}
+	
+	public int deckSize() {	//for testing createDeck() only
 		return deck.size();
 	}
 	
@@ -100,7 +111,7 @@ public class Dealer {
 	}
 	
 	public int getDealerCardsSize() {
-		//return 0;
+		
 		return dealerCards.size();
 	}
 	
@@ -160,13 +171,13 @@ public class Dealer {
 			return 10;
 		}
 		if(rank.compareTo("J") == 0) {
-			return 11;
+			return 10;
 		}
 		else if(rank.compareTo("Q")==0) {
-			return 12;
+			return 10;
 		}
 		if(rank.compareTo("K") == 0) {
-			return 13;
+			return 10;
 		}else {
 			return -1;	//failure case
 		}

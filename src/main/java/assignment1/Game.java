@@ -50,8 +50,7 @@ public class Game {
 	}
 	public void hit() {
 		player.playerCards.add(dealer.hit());
-		player.updateScore();
-	
+		player.updateScore();	
 	}
 	
 	public void dealerHit() {
@@ -84,8 +83,7 @@ public class Game {
 			return false;
 	}
 	 
-	public void stand() {
-		
+	public void stand() {		
 		dealer.stand();
 		aceCheck();	
 		dealer.updateScore();
@@ -154,8 +152,7 @@ public class Game {
 						}
 					}
 				}
-		}
-		
+		}		
 		
 		for(int i = 0; i < player.playerCards.size(); i++) {
 			if(player.playerCards.get(i).getRank().compareTo("A")==0) {
@@ -174,15 +171,12 @@ public class Game {
 					}
 			}
 		}
-		
-		
-		
+				
 		return 0;
 	}
 	
 		public static void main (String [] args) {
 			
-			//System.out.println("Hello");
 			
 			Game game = new Game();
 			Scanner input = new Scanner(System.in);
@@ -217,10 +211,7 @@ public class Game {
 				win = game.winCheck();
 				System.out.println("win: " + win);
 				input.nextLine();
-			/*	if(win == 0) {
-					System.out.println("Enter 'h' to hit, 's' to stand");	//player's turn
-					play = input.nextLine();
-				}*/
+			
 				while (win==0) {
 					
 					System.out.println("Enter 'h' to hit, 's' to stand");	//player's turn
@@ -245,7 +236,6 @@ public class Game {
 						for(int i = 0; i < game.getPlayerCardsSize(); i++) {
 							System.out.print(game.player.playerCards.get(i).getRank() + "" + game.player.playerCards.get(i).getSuit() + " ");
 						}
-						//System.out.println("");
 
 						game.player.updateScore();
 						System.out.println("Player's score: " + game.player.getScore());
@@ -267,8 +257,6 @@ public class Game {
 					win = game.winCheck();
 					
 				}
-				
-			//	System.out.println("");
 				
 				if(win == 1) {
 					System.out.println("Dealer wins with a score of " + game.dealer.getScore());

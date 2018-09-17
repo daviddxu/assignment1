@@ -20,6 +20,16 @@ public class GameTest {
 		
 	}
 	
+	/*@Test 
+	public void shuffleTest() {	//test if deck has been shuffled
+		Dealer dTest1 = new Dealer();
+		Dealer dTest2 = new Dealer();
+		dTest1.createDeck();
+		dTest2.createDeck();
+		
+		
+	}*/
+	
 	@Test
 	public void dealToPlayerTest() { //test dealer deal to player function
 		
@@ -48,7 +58,7 @@ public class GameTest {
 		game.dealer.deck.add(c1);
 		game.dealer.deck.add(c2);
 		game.dealToPlayer();
-		System.out.println("Player's score: " + game.player.getScore() );
+		//System.out.println("Player's score: " + game.player.getScore() );
 		assertEquals("Player has busted (23) (return 1)", 1, game.bustCheck());
 		
 
@@ -146,6 +156,7 @@ public class GameTest {
 			game.dealer.deck.add(c1);
 			game.dealer.deck.add(c2);
 			game.dealer.dealToSelf();
+			game.dealer.flipCard();
 			game.dealer.updateScore();
 			assertEquals("game.softCheck() should return true", true, game.softCheck());
 			
