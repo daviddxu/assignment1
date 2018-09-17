@@ -74,7 +74,16 @@ public class Game {
 	}
 	
 	public boolean softCheck() {	//check for soft 17 (where 11 points come from an Ace)
-			return false;
+		if(dealer.getScore() == 17) {
+			for(int i = 0; i < dealer.getDealerCardsSize(); i++) {
+				if(dealer.dealerCards.get(i).getRank().compareTo("A") == 0) {
+					if(dealer.dealerCards.get(i).getPoints() == 11) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 	 
 	public void stand() {		
