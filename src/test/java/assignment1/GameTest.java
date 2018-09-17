@@ -21,13 +21,15 @@ public class GameTest {
 	}
 	
 	@Test 
-	public void shuffleTest() {	//test if deck has been shuffled
-	/*	Dealer dTest1 = new Dealer();
+	public void shuffleTest() {	//test if deck has been shuffled*
+		/*Dealer dTest1 = new Dealer();
 		Dealer dTest2 = new Dealer();
 		dTest1.createDeck();
-		dTest2.createDeck();
-	*/
-	fail("NOT IMPLEMENTED");
+		dTest2.createUnshuffledDeck();*/
+		
+		Dealer dealerTest = new Dealer();
+		assertEquals("Equal Test should return false", false, dealerTest.equalDeck());
+		//*tests if two cards are in the same positions in both decks
 		
 	}
 	

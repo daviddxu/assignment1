@@ -14,6 +14,7 @@ import java.util.Collections;
 public class Dealer {
 
 	ArrayList<Card> deck = new ArrayList<Card>();
+	ArrayList<Card> uDeck = new ArrayList<Card>();
 	ArrayList<Card> dealerCards = new ArrayList<Card>();
 	int score = 0;
 //	int [] ranks = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
@@ -54,11 +55,32 @@ public class Dealer {
 			for(int j = 0; j<suits.length; j++) {
 				points = genPoints(ranks[i]);
 				card = new Card(ranks[i], points, true, suits[j]);
-				deck.add(card);
+				uDeck.add(card);
 			}
 		}
 	}
 	
+	public boolean equalDeck() {	//check if two decks are equal	*FOR TESTING PURPOSES ONLY*
+		
+		createDeck();
+		createUnshuffledDeck();
+		
+		int flag = 0;
+		if(deck.size()!=uDeck.size()) {
+			return false;
+		}
+		
+		for(int i = 0; i < deck.size(); i++) {
+			if(deck.get(i).getPoints() == uDeck.get(i).getPoints() && deck.get(i).getRank().equals(uDeck.get(i).getRank()) &&deck.get(i).getSuit().equals(uDeck.get(i).getSuit()) && deck.get(i).getFaceUp() == uDeck.get(i).getFaceUp()) {
+				flag++;
+			}
+		}
+				
+		if(flag == deck.size()) {	//if all cards in both decks are in the same order (shuffled deck was not actually shuffled), return true
+			return true;
+		}
+		return false;
+	}
 	public int deckSize() {	//for testing createDeck() only
 		return deck.size();
 	}
