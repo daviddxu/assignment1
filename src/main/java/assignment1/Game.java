@@ -283,13 +283,24 @@ public class Game {
 			}else if (choice == 2) {	//file input
 				/*PLACEHOLDER*/
 				//System.out.println("NOT IMPLEMENTED");
-				FileReader in = null;
+				BufferedReader in = null;
 				
+				String file;
 				String temp = null;
 				
 				
 				//WHILE EOF NOT REACHED
-				
+				try {
+					while((file = in.readLine()) != null) {
+						Scanner scanner = new Scanner(file);
+						temp = scanner.next();
+						
+						
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 					//FIRST TWO CARDS ARE DEALT TO PLAYER
 					//NEXT TWO CARDS ARE DEALT TO DEALER
 						//SCORE CHECK- IF WINNER DETECTED END GAME
