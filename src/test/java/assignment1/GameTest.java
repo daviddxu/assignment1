@@ -20,15 +20,16 @@ public class GameTest {
 		
 	}
 	
-	/*@Test 
+	@Test 
 	public void shuffleTest() {	//test if deck has been shuffled
-		Dealer dTest1 = new Dealer();
+	/*	Dealer dTest1 = new Dealer();
 		Dealer dTest2 = new Dealer();
 		dTest1.createDeck();
 		dTest2.createDeck();
+	*/
+	fail("NOT IMPLEMENTED");
 		
-		
-	}*/
+	}
 	
 	@Test
 	public void dealToPlayerTest() { //test dealer deal to player function
