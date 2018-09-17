@@ -2,6 +2,7 @@ package assignment1;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.*;
 /*
  * Game.java (BlackJack)
  * Contains main method for game operation
@@ -32,6 +33,7 @@ public class Game {
 		if(dealer.getScore() == 21) {
 			return 1;
 		}else if(blackJackTest()==1) {
+			System.out.println("Dealer has a blackjack");
 			return 1;
 		}else if(player.getScore() > 21) {
 			System.out.println("Player has busted with a score of " + player.getScore());
@@ -40,6 +42,7 @@ public class Game {
 			return 2;
 		}
 		else if(blackJackTest()==2) {
+			System.out.println("Player has a blackjack");
 			return 2;
 		}else if (dealer.getScore() >21 ) {
 			System.out.println("Dealer has busted with a score of " + dealer.getScore());
@@ -165,7 +168,7 @@ public class Game {
 			
 			else if(player.playerCards.get(i).getRank().compareTo("10")==0|| player.playerCards.get(i).getRank().compareTo("J")==0 || player.playerCards.get(i).getRank().compareTo("Q")==0 ||  player.playerCards.get(i).getRank().compareTo("K")==0 ) {
 					for(int k = 0; k < player.playerCards.size(); k++) {
-						if(dealer.dealerCards.get(k).getRank().compareTo("A")==0) {
+						if(player.playerCards.get(k).getRank().compareTo("A")==0) {
 							return 2;
 						}
 					}
@@ -198,7 +201,7 @@ public class Game {
 				game.player.updateScore();
 				System.out.println("");
 				System.out.println("Player's score: " + game.player.getScore());
-				System.out.println("");
+		//		System.out.println("");
 				System.out.println("Dealer's cards: ");
 				for(int i = 0; i < game.dealer.dealerCards.size(); i++) {
 					if(game.dealer.dealerCards.get(i).getFaceUp() == true) {
@@ -226,8 +229,13 @@ public class Game {
 						System.out.println("");
 						game.player.updateScore();
 						win = game.winCheck();
-						
+						System.out.println("win: " + win);
 						System.out.println("Player's score: " + game.player.getScore());
+						
+						/*TEMP*/
+						if(win == 1) {
+							break;
+						}
  
 					}else if(play.compareTo("s") == 0) {
 						game.stand();
@@ -237,7 +245,9 @@ public class Game {
 							System.out.print(game.player.playerCards.get(i).getRank() + "" + game.player.playerCards.get(i).getSuit() + " ");
 						}
 
+						System.out.println("");
 						game.player.updateScore();
+						
 						System.out.println("Player's score: " + game.player.getScore());
 
 					}
@@ -251,11 +261,15 @@ public class Game {
 							game.dealer.updateScore();
 						}
 					}
+					System.out.println("");
 					System.out.println("Dealer score: " + game.dealer.getScore());
 
 					
 					win = game.winCheck();
-					
+					/*TEMP*/
+					if(win == 2) {
+						break;
+					}
 				}
 				
 				if(win == 1) {
@@ -268,7 +282,22 @@ public class Game {
 				
 			}else if (choice == 2) {	//file input
 				/*PLACEHOLDER*/
-				System.out.println("NOT IMPLEMENTED");
+				//System.out.println("NOT IMPLEMENTED");
+				FileReader in = null;
+				
+				String temp = null;
+				
+				
+				//WHILE EOF NOT REACHED
+				
+					//FIRST TWO CARDS ARE DEALT TO PLAYER
+					//NEXT TWO CARDS ARE DEALT TO DEALER
+						//SCORE CHECK- IF WINNER DETECTED END GAME
+							//OTHERWISE CHECK FOR H (HIT) OR S (STAND)
+								//IF H- HIT AND DEALER AUTO PLAYS
+								//IF S- PLAYER STANDS AND DEALER AUTO PLAYS
+							//SCORE CHECK - IF WINNER DETECTED END GAME
+				
 			}
 		}
 }
