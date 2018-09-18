@@ -81,6 +81,8 @@ public class Dealer {
 		}
 		return false;
 	}
+	
+	
 	public int deckSize() {	//for testing createDeck() only
 		return deck.size();
 	}
@@ -138,15 +140,7 @@ public class Dealer {
 	}
 	
 	public void updateScore() {
-		int newScore = 0;
-		
-		for(int i = 0; i < dealerCards.size(); i++) {
-			
-			if(dealerCards.get(i).getFaceUp() == true) {
-				newScore += dealerCards.get(i).getPoints();
-			}
-		}
-		this.score = newScore;
+	
 	}
 	
 	public boolean standTest() {

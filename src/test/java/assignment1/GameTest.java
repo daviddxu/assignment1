@@ -7,6 +7,8 @@ package assignment1;
  */
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class GameTest {	
@@ -151,6 +153,51 @@ public class GameTest {
 		assertEquals("genPoints should return 1", 1, game.dealer.genPoints(rank));
 	}
 	
+	@Test 
+	public void flipCardTest() {
+		
+		Game game = new Game();
+		
+		Card c1 = new Card("2", 2, false, "S");
+		Card c2 = new Card("5", 5, true, "D");
+		
+		game.dealer.deck.add(c1);
+		game.dealer.deck.add(c2);
+		
+		game.dealer.dealToSelf();
+		
+		game.dealer.flipCard();
+		assertEquals("flipCardTestHelper should return true", true, flipCardTestHelper(game.dealer.dealerCards));
+		
+		
+	}
+	
+	public boolean flipCardTestHelper(ArrayList<Card> cards) {
+		
+		for(int i = 0; i < cards.size(); i++) {
+			if(cards.get(i).getFaceUp() == false) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
+	@Test
+	public void updateDealerScoreTest() {	//
+		Game game = new Game();
+		
+ 		Card c1 = new Card("2", 2, false, "S");
+		Card c2 = new Card("5", 5, true, "D");
+		game.dealer.deck.add(c1);
+		game.dealer.deck.add(c2);
+		game.dealer.dealToSelf();	
+		game.dealer.updateScore();
+ 		assertEquals("New score should be 5", 5, game.dealer.getScore());
+		
+		
+		
+	}
 	@Test
 	public void softCheckTest() {	//test game.softCheck
 			Game game = new Game();
