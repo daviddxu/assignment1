@@ -30,8 +30,7 @@ public class Card {
 		return rank;
 	}
 	
-	public void setRank(String rank) {
-		
+	public void setRank(String rank) {		
 		this.rank = rank;
 	}
 	
@@ -43,8 +42,7 @@ public class Card {
 		this.points = points;
 	}
 	
-	public String getSuit() {
-		
+	public String getSuit() {		
 		return this.suit;
 	}
 	
@@ -56,8 +54,7 @@ public class Card {
 		return this.faceup;
 	}
 	
-	public void setFaceUp(boolean faceup) {
-		
-			this.faceup = faceup;
+	public void setFaceUp(boolean faceup) {		
+		this.faceup = faceup;
 	}
 }

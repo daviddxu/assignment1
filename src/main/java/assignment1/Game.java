@@ -56,7 +56,7 @@ public class Game {
 		player.updateScore();	
 	}
 	
-	public void dealerHit() {
+	public void dealerHit() {	//dealer's hit
 		dealer.flipCard();
 		aceCheck();
 		dealer.dealerCards.add(dealer.hit());
@@ -86,7 +86,7 @@ public class Game {
 		return false;
 	}
 	 
-	public void stand() {		
+	public void stand() {		//player's ('s') or dealer's stand (automatic)
 		dealer.stand();
 		aceCheck();	
 		dealer.updateScore();
@@ -130,8 +130,7 @@ public class Game {
 			}
 		}
 		
-		return false;		
-		
+		return false;				
 }
 	
 	public int blackJackTest() {	//return 0 if n/a, 1 if dealer wins and 2 if player wins; check dealer first
@@ -144,8 +143,7 @@ public class Game {
 							return 1;
 						}
 					}
-				}
-				
+				}				
 				else if(dealer.dealerCards.get(i).getRank().compareTo("10") == 0 || dealer.dealerCards.get(i).getRank().compareTo("J") == 0 || dealer.dealerCards.get(i).getRank().compareTo("Q") == 0  || dealer.dealerCards.get(i).getRank().compareTo("K") == 0 ) {
 		//			tenFlag = 1;
 					
@@ -164,8 +162,7 @@ public class Game {
 						return 2;
 					}
 				}
-			}
-			
+			}			
 			else if(player.playerCards.get(i).getRank().compareTo("10")==0|| player.playerCards.get(i).getRank().compareTo("J")==0 || player.playerCards.get(i).getRank().compareTo("Q")==0 ||  player.playerCards.get(i).getRank().compareTo("K")==0 ) {
 					for(int k = 0; k < player.playerCards.size(); k++) {
 						if(player.playerCards.get(k).getRank().compareTo("A")==0) {
@@ -287,19 +284,33 @@ public class Game {
 				
 				String file;
 				String temp = null;
+				ArrayList <String> fileInput = new ArrayList<String>();
 				
 				
+				/*
+				 * TO DO: Make a CardFactory method in Game class to process SK, JD, etc. and relevant testers
+				 * 
+				 */
 				//WHILE EOF NOT REACHED
 				try {
 					while((file = in.readLine()) != null) {
 						Scanner scanner = new Scanner(file);
 						temp = scanner.next();
-						
-						
+						//read everything in the file into an ArrayList (separate at whitespace)
+							
 					}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}
+				
+				for(int i = 0; i < fileInput.size(); i++) {
+					
+					//if i = 0 || 1 -> deal those cards to player
+					//if i = 2 || 3 -> deal those cards to dealer
+					//if fileInput.get(i) == 'h' -> player hits -> dealer autoplays with next card (may cause unhandled exception if i+1)
+					//if fileInput.get(i) == 's' -> player stands -> ''
+					
 				}
 					//FIRST TWO CARDS ARE DEALT TO PLAYER
 					//NEXT TWO CARDS ARE DEALT TO DEALER

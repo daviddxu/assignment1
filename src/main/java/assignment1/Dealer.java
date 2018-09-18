@@ -103,7 +103,6 @@ public class Dealer {
 	}
 	
 	public void stand() {	//when a player wants to stand
-
 		flipCard();
 	}
 	
@@ -132,8 +131,7 @@ public class Dealer {
 	public void updateScore() {
 	int newScore = 0;
 		
-		for(int i = 0; i < dealerCards.size(); i++) {
-			
+		for(int i = 0; i < dealerCards.size(); i++) {			
 			if(dealerCards.get(i).getFaceUp() == true) {
 				newScore += dealerCards.get(i).getPoints();
 			}
@@ -197,7 +195,13 @@ public class Dealer {
 		 		
 	}
 	
-	public void play() {
+	public Card cardGen(String cardStr) {
+		
+		Card newCard = new Card();
+		
+		return newCard;
+	}
+	public void play() {	//DEPRECATED
 		
 	}
 }

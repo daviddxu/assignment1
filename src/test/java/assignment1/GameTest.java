@@ -70,7 +70,7 @@ public class GameTest {
 	}
 	
 	@Test
-	public void hitTest() {	//test player's hit: deal the player another card and check if player busts
+	public void playerHitTest() {	//test player's hit: deal the player another card and check if player busts
 		
 		Game game = new Game();
 		
@@ -85,15 +85,11 @@ public class GameTest {
 	@Test
 	public void standTest() {	//test player's stand: mark all cards on table face up 
 		
-		Game game = new Game();
-		
+		Game game = new Game();		
 		game.dealer.createDeck();
 		game.dealToPlayer();
-		game.hit();
-		assertEquals("All of dealer's cards should be face up: ", true, game.dealer.standTest());
-
-
-		
+		game.stand();	//calls dealer.stand()
+		assertEquals("All of dealer's cards should be face up: ", true, game.dealer.standTest());		
 	}
 	
 	@Test
@@ -162,10 +158,8 @@ public class GameTest {
 		Card c2 = new Card("5", 5, true, "D");
 		
 		game.dealer.deck.add(c1);
-		game.dealer.deck.add(c2);
-		
-		game.dealer.dealToSelf();
-		
+		game.dealer.deck.add(c2);		
+		game.dealer.dealToSelf();		
 		game.dealer.flipCard();
 		assertEquals("flipCardTestHelper should return true", true, flipCardTestHelper(game.dealer.dealerCards));
 		
@@ -192,15 +186,11 @@ public class GameTest {
 		game.dealer.deck.add(c2);
 		game.dealer.dealToSelf();	
 		game.dealer.updateScore();
-		assertEquals("New score should be 2", 2, game.dealer.getScore());
-		
-		
-		
+		assertEquals("New score should be 2", 2, game.dealer.getScore());		
 	}
 	
 	@Test
-	public void updatePlayerScoreTest() {	//test updateScore in Player class
-		
+	public void updatePlayerScoreTest() {	//test updateScore in Player class		
 		Game game = new Game();
 		Card c1 = new Card("2", 2, true, "S");
 		Card c2 = new Card("5", 5, true, "D");
@@ -208,11 +198,12 @@ public class GameTest {
 		game.dealer.deck.add(c2);
 		game.player.playerCards.addAll(game.dealer.dealToPlayer());
 		game.player.updateScore();
-		assertEquals("New score should be 7", 7, game.player.getScore());
-			
+		assertEquals("New score should be 7", 7, game.player.getScore());			
 	}
+	
 	@Test
 	public void softCheckTest() {	//test game.softCheck
+		
 			Game game = new Game();
 			Card c1 = new Card("A", 11, true, "S");
 			Card c2 = new Card("6", 6, true, "D");
@@ -229,8 +220,7 @@ public class GameTest {
 	@Test
 	public void getPointsTest() {
 		
-		Game game = new Game();
-		
+		Game game = new Game();		
 		assertEquals("game.genPoints should return '1'", 1, game.dealer.genPoints("A"));
 		assertEquals("game.genPoints should return '2'", 2, game.dealer.genPoints("2"));
 		assertEquals("game.genPoints should return '3'", 3, game.dealer.genPoints("3"));
@@ -244,25 +234,21 @@ public class GameTest {
 		assertEquals("game.genPoints should return '10'", 10, game.dealer.genPoints("J"));
 		assertEquals("game.genPoints should return '10'", 10, game.dealer.genPoints("Q"));
 		assertEquals("game.genPoints should return '10'", 10, game.dealer.genPoints("K"));
-		assertEquals("game.genPoints should return '-1'", -1, game.dealer.genPoints("E"));
+		assertEquals("game.genPoints should return '-1'", -1, game.dealer.genPoints("E"));		
+	}
+	
+	@Test
+	public void cardGenTest() {
+		
+		Game game = new Game();
+		String cardStr = "KS";
+		Card c1 = game.dealer.cardGen(cardStr);
+		game.dealer.dealerCards.add(c1);
 
 		
-
-
-
-
-
-
-
-
-		
-
-
-		
-
-		
-		
-		
-		
+		assertEquals("rank should be K", "K", game.dealer.dealerCards.get(0).getRank());
+		assertEquals("suit should be S", "S", game.dealer.dealerCards.get(0).getSuit());
+		assertEquals("should be face up", true, game.dealer.dealerCards.get(0).getFaceUp());
+		assertEquals("should be 10", 10, game.dealer.dealerCards.get(0).getPoints());
 	}
 }
