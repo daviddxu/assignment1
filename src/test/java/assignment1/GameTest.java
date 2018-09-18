@@ -225,4 +225,41 @@ public class GameTest {
 			
 	}
 
+	
+	@Test
+	public void getPointsTest() {
+		
+		Game game = new Game();
+		
+		assertEquals("game.genPoints should return '1'", 1, game.dealer.genPoints("A"));
+		assertEquals("game.genPoints should return '2'", 2, game.dealer.genPoints("2"));
+		assertEquals("game.genPoints should return '3'", 3, game.dealer.genPoints("3"));
+		assertEquals("game.genPoints should return '4'", 4, game.dealer.genPoints("4"));
+		assertEquals("game.genPoints should return '5'", 5, game.dealer.genPoints("5"));
+		assertEquals("game.genPoints should return '6'", 6, game.dealer.genPoints("6"));
+		assertEquals("game.genPoints should return '7'", 7, game.dealer.genPoints("7"));
+		assertEquals("game.genPoints should return '8'", 8, game.dealer.genPoints("8"));
+		assertEquals("game.genPoints should return '9'", 9, game.dealer.genPoints("9"));
+		assertEquals("game.genPoints should return '10'", 10, game.dealer.genPoints("10"));
+		assertEquals("game.genPoints should return 'J'", 10, game.dealer.genPoints("J"));
+		assertEquals("game.genPoints should return 'Q'", 10, game.dealer.genPoints("Q"));
+		assertEquals("game.genPoints should return 'K'", 10, game.dealer.genPoints("K"));
+
+
+
+
+
+
+
+
+		
+
+
+		
+
+		
+		
+		
+		
+	}
 }

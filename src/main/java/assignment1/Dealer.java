@@ -152,54 +152,11 @@ public class Dealer {
 	}
 	
 	public int genPoints(String rank) {	//convert ranks (string) to points (int)
-		
-		
-		if(rank.compareTo("A") == 0) {
-			return 1;
-		}
-		else if(rank.compareTo("2")==0) {
-			return 2;
-		}
-		if(rank.compareTo("3") == 0) {
-			return 3;
-		}
-		else if(rank.compareTo("4")==0) {
-			return 4;
-		}
-		if(rank.compareTo("5") == 0) {
-			return 5;
-		}
-		else if(rank.compareTo("6")==0) {
-			return 6;
-		}
-		if(rank.compareTo("7") == 0) {
-			return 7;
-		}
-		else if(rank.compareTo("8")==0) {
-			return 8;
-		}
-		if(rank.compareTo("9") == 0) {
-			return 9;
-		}
-		else if(rank.compareTo("10")==0) {
-			return 10;
-		}
-		if(rank.compareTo("J") == 0) {
-			return 10;
-		}
-		else if(rank.compareTo("Q")==0) {
-			return 10;
-		}
-		if(rank.compareTo("K") == 0) {
-			return 10;
-		}else {
-			return -1;	//failure case
-		}
-		 
-		
-		 
-		
+				
+		return -1;
+		 		
 	}
+	
 	public void play() {
 		
 	}
