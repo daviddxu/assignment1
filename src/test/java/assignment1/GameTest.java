@@ -241,9 +241,12 @@ public class GameTest {
 		assertEquals("game.genPoints should return '8'", 8, game.dealer.genPoints("8"));
 		assertEquals("game.genPoints should return '9'", 9, game.dealer.genPoints("9"));
 		assertEquals("game.genPoints should return '10'", 10, game.dealer.genPoints("10"));
-		assertEquals("game.genPoints should return 'J'", 10, game.dealer.genPoints("J"));
-		assertEquals("game.genPoints should return 'Q'", 10, game.dealer.genPoints("Q"));
-		assertEquals("game.genPoints should return 'K'", 10, game.dealer.genPoints("K"));
+		assertEquals("game.genPoints should return '10'", 10, game.dealer.genPoints("J"));
+		assertEquals("game.genPoints should return '10'", 10, game.dealer.genPoints("Q"));
+		assertEquals("game.genPoints should return '10'", 10, game.dealer.genPoints("K"));
+		assertEquals("game.genPoints should return '-1'", -1, game.dealer.genPoints("E"));
+
+		
 
 
 
