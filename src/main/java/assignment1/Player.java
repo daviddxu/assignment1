@@ -24,7 +24,11 @@ public class Player {
 	}
 	
 	public void updateScore() {	
-		
+		int newScore = 0;
+		for(int i = 0; i < playerCards.size(); i++) {
+			newScore += playerCards.get(i).getPoints();
+		}
+		this.score = newScore;
 	}
 	public boolean aceCheck() {	//return true if an Ace's points are changed to 11, false otherwise
 		
