@@ -184,19 +184,32 @@ public class GameTest {
 	
 	
 	@Test
-	public void updateDealerScoreTest() {	//
-		Game game = new Game();
-		
- 		Card c1 = new Card("2", 2, false, "S");
+	public void updateDealerScoreTest() {	//test updateScore in Dealer class
+		Game game = new Game();		
+ 		Card c1 = new Card("2", 2, true, "S");
 		Card c2 = new Card("5", 5, true, "D");
 		game.dealer.deck.add(c1);
 		game.dealer.deck.add(c2);
 		game.dealer.dealToSelf();	
 		game.dealer.updateScore();
- 		assertEquals("New score should be 5", 5, game.dealer.getScore());
+		assertEquals("New score should be 2", 2, game.dealer.getScore());
 		
 		
 		
+	}
+	
+	@Test
+	public void updatePlayerScoreTest() {	//test updateScore in Player class
+		
+		Game game = new Game();
+		Card c1 = new Card("2", 2, true, "S");
+		Card c2 = new Card("5", 5, true, "D");
+		game.dealer.deck.add(c1);
+		game.dealer.deck.add(c2);
+		game.player.playerCards.addAll(game.dealer.dealToPlayer());
+		game.player.updateScore();
+		assertEquals("New score should be 7", 7, game.player.getScore());
+			
 	}
 	@Test
 	public void softCheckTest() {	//test game.softCheck

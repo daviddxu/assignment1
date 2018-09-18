@@ -13,22 +13,18 @@ import java.util.Collections;
  */
 public class Dealer {
 
-	ArrayList<Card> deck = new ArrayList<Card>();
-	ArrayList<Card> uDeck = new ArrayList<Card>();
-	ArrayList<Card> dealerCards = new ArrayList<Card>();
+	ArrayList<Card> deck = new ArrayList<Card>();	//deck of cards for game
+	ArrayList<Card> uDeck = new ArrayList<Card>();	//unshuffled deck for testing purposes only
+	ArrayList<Card> dealerCards = new ArrayList<Card>();	//dealer's hand
 	int score = 0;
 //	int [] ranks = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 	String [] ranks =  {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 	String [] suits = {"S", "C", "D", "H"};	//S- Spades, C- Clubs, D- Diamonds, H- Hearts
  
 	
-	
-	public Dealer() {
-		
+	public Dealer() {		
 		this.score = 0;
-		
 	}
-	
 	
 	public void createDeck() {	//create a 52 card deck
 		
@@ -36,15 +32,12 @@ public class Dealer {
 		int points = 0;
 		for(int i = 0; i < ranks.length; i++) {			
 			for(int j = 0; j < suits.length; j++) {
-				
 				points = genPoints(ranks[i]);
 				card = new Card(ranks[i], points  , true, suits[j]);
 				deck.add(card);
 			}
-		}
-		
+		}		
 		Collections.shuffle(deck); //shuffle generated cards	
-
 	}
 	
 	public void createUnshuffledDeck() {	//create an unshuffled 52 card deck *FOR TESTING PURPOSES ONLY*
@@ -63,8 +56,7 @@ public class Dealer {
 	public boolean equalDeck() {	//check if two decks are equal	*FOR TESTING PURPOSES ONLY*
 		
 		createDeck();
-		createUnshuffledDeck();
-		
+		createUnshuffledDeck();		
 		int flag = 0;
 		if(deck.size()!=uDeck.size()) {
 			return false;
@@ -93,9 +85,7 @@ public class Dealer {
 
 	public ArrayList<Card> dealToPlayer() {	//deal two cards to the player; this function is only called at the start of a game
 		
-		ArrayList<Card> twoCards = new ArrayList<Card>();
-		
-		
+		ArrayList<Card> twoCards = new ArrayList<Card>();				
 		twoCards.add(deck.get(0));
 		deck.remove(0);
 		twoCards.add(deck.get(0));
@@ -140,7 +130,15 @@ public class Dealer {
 	}
 	
 	public void updateScore() {
-	
+	int newScore = 0;
+		
+		for(int i = 0; i < dealerCards.size(); i++) {
+			
+			if(dealerCards.get(i).getFaceUp() == true) {
+				newScore += dealerCards.get(i).getPoints();
+			}
+		}
+		this.score = newScore;
 	}
 	
 	public boolean standTest() {
