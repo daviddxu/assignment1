@@ -195,11 +195,111 @@ public class Dealer {
 		 		
 	}
 	
-	public Card cardGen(String cardStr) {
+	public Card cardGen(String cardStr) {	//must take 2 character String
 		
 		Card newCard = new Card();
 		
+		String rank = null;
+		String suit = null;
+		boolean faceUp = true;
+		int points = -1;
+		
+		
+		if(cardStr.length() != 2) {
+			
+			if(cardStr.contains("10")) {
+				if(cardStr.charAt(0) == 'S') {
+					rank = "10";
+					points = 10;
+					suit = "S";
+					newCard = new Card(rank, points, faceUp, suit);
+					return newCard;
+				}
+				else if(cardStr.charAt(0) == 'D') {
+					rank = "10";
+					points = 10;
+					suit = "D";
+					newCard = new Card(rank, points, faceUp, suit);
+					return newCard;
+				}
+				else if (cardStr.charAt(0) == 'C') {
+					rank = "10";
+					points = 10;
+					suit = "C";
+					newCard = new Card(rank, points, faceUp, suit);
+					return newCard;
+				}
+				else if(cardStr.charAt(0) == 'H') {
+					rank = "10";
+					points = 10;
+					suit = "H"; 	
+					newCard = new Card(rank, points, faceUp, suit);
+					return newCard;
+				}else {
+					return null;
+				}
+			}else {
+				return null;
+			}
+		}
+		
+		
+		if(cardStr.charAt(0) == 'S') {
+			suit = "S";
+		}else if (cardStr.charAt(0) == 'C') {
+			suit = "C";
+		}else if(cardStr.charAt(0) == 'D') {
+			suit = "D";
+		}else if(cardStr.charAt(0) == 'H') {
+			suit = "H";
+		}
+
+		
+		if(cardStr.charAt(1) == 'A') {
+			rank = "A";
+			points = 1;
+		}
+		else if(cardStr.charAt(1) == 'K') {
+			rank = "K";
+			points = 10;
+		}else if (cardStr.charAt(1) == 'Q') {
+			rank = "Q";
+			points = 10;
+		}else if(cardStr.charAt(1) == 'J') {
+			rank = "J";
+			points = 10;
+		}else if(cardStr.charAt(1) == '9') {
+			rank = "9";
+			points = 9;
+		}else if (cardStr.charAt(1) == '8') {
+			rank = "8";
+			points = 8;
+		}else if (cardStr.charAt(1) == '7') {
+			rank = "7";
+			points = 7;
+		}else if(cardStr.charAt(1) == '6') {
+			rank = "6";
+			points =6;
+		}else if(cardStr.charAt(1) == '5') {
+			rank = "5";
+			points = 6;
+		}else if(cardStr.charAt(1) == '4') {
+			rank = "4";
+			points = 4;
+		}else if(cardStr.charAt(1) == '3') {
+			rank = "3";
+			points = 3;
+		}else if(cardStr.charAt(1) == '2') {
+			rank = "2";
+			points = 2;
+		}else {
+			return null;
+		}
+		
+		newCard = new Card(rank, points, faceUp, suit);
 		return newCard;
+		
+		
 	}
 	public void play() {	//DEPRECATED
 		
