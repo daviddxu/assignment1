@@ -12,15 +12,11 @@ public class Game {
 	
 	Dealer dealer = new Dealer();
 	Player player = new Player();
-	
-
-	
-	public void dealToPlayer() {
 		
+	public void dealToPlayer() {
 		player.playerCards.addAll(dealer.dealToPlayer());
 		aceCheck();
-		player.updateScore();
-		
+		player.updateScore();	
 	}
 	
 	public void dealToSelf() {
@@ -28,6 +24,7 @@ public class Game {
 		aceCheck();
 		dealer.updateScore();
 	}
+	
 	public int winCheck() {	//check dealer then player for win conditions	1 for dealer win, 2 for player win
 		
 		 if(bustCheck() == 1) {
@@ -52,16 +49,17 @@ public class Game {
 			return 1;
 		}else if(player.getScore()==21) {
 			return 2;
-		}
-		 		
+		}		 		
 		return 0;
 	}
+	
 	public void hit() {
 		player.playerCards.add(dealer.hit());
 		player.updateScore();	
 	}
 	
 	public void dealerHit() {	//dealer's hit
+		
 		dealer.flipCard();
 		aceCheck();
 		dealer.dealerCards.add(dealer.hit());
@@ -69,16 +67,12 @@ public class Game {
 	}
 	
 	public void dealerPlay() {
-		if(softCheck() == true || dealer.getScore() <= 16) {	//if soft 17 or dealer points <= 16
-			System.out.println("Dealer hits");
-			dealerHit();
-		}else {
-			System.out.println("Dealer stands");
-			stand();
-		}
+		
+	
 	}
 	
 	public boolean softCheck() {	//check for soft 17 (where 11 points come from an Ace)
+	
 		if(dealer.getScore() == 17) {
 			for(int i = 0; i < dealer.getDealerCardsSize(); i++) {
 				if(dealer.dealerCards.get(i).getRank().compareTo("A") == 0) {
@@ -107,8 +101,7 @@ public class Game {
 		
 		if(player.getScore() > 21) {
 			return 1;
-		}
-		
+		}		
 		if(dealer.getScore() > 21) {
 			return 2;
 		}
@@ -214,25 +207,18 @@ public class Game {
 				}
 				System.out.println("Dealer score: " + game.dealer.getScore());
 
-				//win = game.winCheck();
-			//	System.out.println("win: " + win);
 				input.nextLine();
 				
-				//check for blackjack after cards dealt to player and dealer
-				//game.dealer.flipCard();
-			//	game.dealer.updateScore();
-				
+				//check for blackjack after cards dealt to player and dealer				
 				if(game.blackJackTest()==2) {
 					//win =2;
 					System.out.println("Player has a blackjack");
 					playerHasBlackJack = true;
-				}
-				
+				}				
 				if(game.blackJackTest()==1) {
 					System.out.println("Dealer has a blackjack");
 					dealerHasBlackJack = true;
-				}
-				
+				}				
 				if(dealerHasBlackJack == true) {
 					win = 1;
 				}else if(playerHasBlackJack == true) {
@@ -251,15 +237,11 @@ public class Game {
 						}
 						System.out.println("");
 						game.player.updateScore();
-						//win = game.winCheck();
-						//System.out.println("win: " + win);
-						System.out.println("Player's score: " + game.player.getScore());
-						
+						System.out.println("Player's score: " + game.player.getScore());						
 						/*TEMP*/
 						if(win == 1) {
 							break;
-						}
- 
+						} 
 					}else if(play.compareTo("s") == 0) {
 						game.stand();
 						System.out.println("Player stands");
@@ -267,15 +249,12 @@ public class Game {
 						for(int i = 0; i < game.getPlayerCardsSize(); i++) {
 							System.out.print(game.player.playerCards.get(i).getRank() + "" + game.player.playerCards.get(i).getSuit() + " ");
 						}
-
 						System.out.println("");
-						game.player.updateScore();
-						
+						game.player.updateScore();						
 						System.out.println("Player's score: " + game.player.getScore());
-
 					}
 					
-					/*Dealer's play*/
+					/*Dealer's turn*/
 					game.dealer.flipCard();		 			
 					game.dealerPlay();
 					System.out.println("Dealer's cards: ");
@@ -286,25 +265,20 @@ public class Game {
 						}
 					}
 					System.out.println("");
-					System.out.println("Dealer score: " + game.dealer.getScore());
-
-					
+					System.out.println("Dealer score: " + game.dealer.getScore());					
 					win = game.winCheck();	//only check for win AFTER player and dealer have moved
 					/*TEMP*/
 					if(win == 1 ||win == 2) {
 						break;
 					}
-				}
-				
+				}			
 				if(win == 1) {
 					System.out.println("Dealer wins with a score of " + game.dealer.getScore());
 				}else if(win == 2) {
 					System.out.println("Player wins with a score of: " + game.player.getScore());
-				}
-			
-				
-				
-			}else if (choice == 2) {	//file input			
+				}							
+			}
+			else if (choice == 2) {	//file input			
 				Scanner f;
 				String filePath = null;
 				ArrayList <String> fileContents = new ArrayList<String>();
@@ -319,10 +293,7 @@ public class Game {
 				//	System.out.println("Enter file path: ");
 				//filePath = input.nextLine();
 				try {
-					f = new Scanner(new File("C:\\Users\\User\\Documents\\file.txt"));
-				
-			//	String temp = null;
-				
+					f = new Scanner(new File("C:\\Users\\User\\Documents\\file.txt"));				
 				while(f.hasNext()) {
 					fileContents.add(f.next());
 				}
@@ -374,7 +345,6 @@ public class Game {
 								
 					if(fileContents.get(i).equals("H")) {	//player hits with card at i+1
 						//prepare card
-						//playerCommandFlag =1;
 						playerEndTurn = false;
 						game.dealer.deck.add(game.dealer.cardGen(fileContents.get(i+1)));	//this is unsafe
 						game.hit();

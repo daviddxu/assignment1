@@ -53,21 +53,19 @@ public class Dealer {
 		}
 	}
 	
-	public boolean equalDeck() {	//check if two decks are equal	*FOR TESTING PURPOSES ONLY*
+	public boolean equalDeck() {	//check if two decks are equal	*FOR TESTING PURPOSES ONLY* (see shuffleTest() (GameTest) for details)
 		
 		createDeck();
 		createUnshuffledDeck();		
 		int flag = 0;
 		if(deck.size()!=uDeck.size()) {
 			return false;
-		}
-		
+		}		
 		for(int i = 0; i < deck.size(); i++) {
 			if(deck.get(i).getPoints() == uDeck.get(i).getPoints() && deck.get(i).getRank().equals(uDeck.get(i).getRank()) &&deck.get(i).getSuit().equals(uDeck.get(i).getSuit()) && deck.get(i).getFaceUp() == uDeck.get(i).getFaceUp()) {
 				flag++;
 			}
-		}
-				
+		}				
 		if(flag == deck.size()) {	//if all cards in both decks are in the same order (shuffled deck was not actually shuffled), return true
 			return true;
 		}
@@ -84,21 +82,18 @@ public class Dealer {
 	}
 
 	public ArrayList<Card> dealToPlayer() {	//deal two cards to the player; this function is only called at the start of a game
-		
+
 		ArrayList<Card> twoCards = new ArrayList<Card>();				
 		twoCards.add(deck.get(0));
 		deck.remove(0);
 		twoCards.add(deck.get(0));
 		deck.remove(0);
-		return twoCards;
-		
+		return twoCards;		
 	}
 	
 	public Card hit() {	//when player or dealer wants to hit
 		Card newCard = deck.get(0);
-		deck.remove(0);
-		//System.out.println("There are " + deckSize() + " cards remaining in the deck.");
-		
+		deck.remove(0);		
 		return newCard;
 	}
 	
@@ -123,23 +118,19 @@ public class Dealer {
 		updateScore();
 	}
 	
-	public int getDealerCardsSize() {
-		
+	public int getDealerCardsSize() {		
 		return dealerCards.size();
 	}
 	
-	public void updateScore() {
-	int newScore = 0;
-		
-		for(int i = 0; i < dealerCards.size(); i++) {			
-		//	if(dealerCards.get(i).getFaceUp() == true) {
-				newScore += dealerCards.get(i).getPoints();
-			//}
-		}
+	public void updateScore() {		
+		int newScore = 0;		
+			for(int i = 0; i < dealerCards.size(); i++) {			
+				newScore += dealerCards.get(i).getPoints();			
+			}
 		this.score = newScore;
 	}
 	
-	public boolean standTest() {
+	public boolean standTest() {	//FOR TESTING ONLY: NOT USED IN GAME (see standTest() (Game) for details)
 				
 		for(int i = 0; i < dealerCards.size(); i++) {
 			if(dealerCards.get(i).getFaceUp() == false) {
@@ -241,8 +232,7 @@ public class Dealer {
 				return null;
 			}
 		}
-		
-		
+				
 		if(cardStr.charAt(0) == 'S') {
 			suit = "S";
 		}else if (cardStr.charAt(0) == 'C') {
@@ -252,7 +242,6 @@ public class Dealer {
 		}else if(cardStr.charAt(0) == 'H') {
 			suit = "H";
 		}
-
 		
 		if(cardStr.charAt(1) == 'A') {
 			rank = "A";

@@ -13,34 +13,29 @@ import org.junit.Test;
 
 public class GameTest {	
 	
+	/*tests deckGen() (Dealer)*/
 	@Test
-	public void deckGenTest() {	//test if a 52 card deck is generated
-		
+	public void deckGenTest() {	//test if a 52 card deck is generated		
 		Dealer dealerTest = new Dealer();
 		dealerTest.createDeck();
-		assertEquals("Deck must have 52 cards", 52, dealerTest.deckSize());
-		
+		assertEquals("Deck must have 52 cards", 52, dealerTest.deckSize());		
 	}
-	
+	/*tests shuffling operation in deckGen() using createUnshuffledDeck() (Dealer)*/
 	@Test 
 	public void shuffleTest() {	//test if deck has been shuffled*
-	
-		
 		Dealer dealerTest = new Dealer();
 		assertEquals("Equal Test should return false", false, dealerTest.equalDeck());
-		//*tests if two cards are in the same positions in both decks
-		
+		//*tests if two cards are in the same positions in both decks	
 	}
-	
+	/*tests dealToPlayer() (Dealer) */
 	@Test
-	public void dealToPlayerTest() { //test dealer deal to player function
-		
+	public void dealToPlayerTest() { //test dealer deal to player function		
 		Game game = new Game();
 		game.dealer.createDeck();
 		game.dealToPlayer();
 		assertEquals("Player must have two cards", 2, game.getPlayerCardsSize());
 	}
-	
+	/*tests dealToSelf() (Dealer)*/
 	@Test
 	public void dealToSelfTest() {
 		Dealer dealer = new Dealer();
@@ -49,6 +44,7 @@ public class GameTest {
 		assertEquals("Dealer must have two cards", 2, dealer.getDealerCardsSize());
 	}
 
+	/*tests winCheck() (Game) */
 	@Test
 	public void winCheckTest() {
 		Game game = new Game();
@@ -77,9 +73,10 @@ public class GameTest {
 		assertEquals("Player has a blackjack", 2, game.blackJackTest());	//calls blackjack check function w/o accessing getScore
 		game.dealer.dealerCards.add(new Card("10", 10, true, "H"));
 		game.dealer.dealerCards.add(new Card("A", 11, true, "A"));
-		assertEquals("Dealer has a blackjack", 1, game.blackJackTest());		
-	
+		assertEquals("Dealer has a blackjack", 1, game.blackJackTest());			
 	}
+	
+	/*test bustCheck() (Game)*/
 	@Test
 	public void bustTest() {	//check if player has busted: exceeded 21 points
 		
@@ -95,7 +92,8 @@ public class GameTest {
 		assertEquals("Player has busted (30) (return 1)", 1, game.bustCheck());
 
 	}
-
+	
+	/*test hit() (Game)*/
 	@Test
 	public void playerHitTest() {	//test player's hit: deal the player another card and check if player busts
 		
@@ -106,6 +104,7 @@ public class GameTest {
 		assertEquals("Player should have 3 cards", 3, game.player.playerCards.size());
 	}
 	
+	/*test stand() (Game)*/
 	@Test
 	public void standTest() {	//test player's stand: mark all cards on table face up 
 		
@@ -116,6 +115,7 @@ public class GameTest {
 		assertEquals("All of dealer's cards should be face up: ", true, game.dealer.standTest());		
 	}
 	
+	/*test dealerHit() (Game)*/
 	@Test
 	public void dealerHitTest() {	//test dealer's play: if <= 16 points or a "soft 17", dealer hits otherwise stands
 		
@@ -132,10 +132,9 @@ public class GameTest {
 		game.dealer.deck.remove(0);
 		game.dealerHit();
 		assertEquals("The dealer should now have three cards", 3, game.dealer.dealerCards.size());
-		
-
 	}
 	
+	/*test blackJackTest for Player (Game) */
 	@Test
 	public void playerBlackjackTest() {	//test blackjack checker function: if a player has an ace and 10, J, Q, K, they win; check dealer first then player; 
 	
@@ -148,6 +147,7 @@ public class GameTest {
 		assertEquals("The player should have blackjack (2)", 2, game.blackJackTest());
 	}
 	
+	/*test blackJackTest for Dealer (Game)*/
 	@Test
 	public void dealerBlackJackTest() {	//test blackjack for dealer
 		
@@ -161,6 +161,7 @@ public class GameTest {
 				
 	}
 	
+	/*test genPoints() (Dealer)*/
 	@Test 
 	public void genPointsTest() {	//test genPoints function in Dealer
 		
@@ -181,6 +182,7 @@ public class GameTest {
 		
 	}
 	
+	/*test flipCard() (Dealer)*/
 	@Test 
 	public void flipCardTest() {
 		
@@ -198,6 +200,7 @@ public class GameTest {
 		
 	}
 	
+	/*helper function for flipCardTest()*/
 	public boolean flipCardTestHelper(ArrayList<Card> cards) {	//helper function for flipCardTest
 		
 		for(int i = 0; i < cards.size(); i++) {
@@ -208,7 +211,7 @@ public class GameTest {
 		return true;
 	}
 	
-	
+	/*test updateScore() (Dealer)*/
 	@Test
 	public void updateDealerScoreTest() {	//test updateScore in Dealer class
 		Game game = new Game();		
@@ -222,6 +225,7 @@ public class GameTest {
 		assertEquals("New score should be 7", 7, game.dealer.getScore());		
 	}
 	
+	/*test updateScore() (Dealer)*/
 	@Test
 	public void updatePlayerScoreTest() {	//test updateScore in Player class		
 		Game game = new Game();
@@ -234,6 +238,7 @@ public class GameTest {
 		assertEquals("New score should be 7", 7, game.player.getScore());			
 	}
 	
+	/*test softCheck() (Game)*/
 	@Test
 	public void softCheckTest() {	//test game.softCheck
 		
@@ -245,13 +250,13 @@ public class GameTest {
 			game.dealer.dealToSelf();
 			game.dealer.flipCard();
 			game.dealer.updateScore();
-			assertEquals("game.softCheck() should return true", true, game.softCheck());
+			assertEquals("game.softCheck() should return true", true, game.softCheck());	//soft 17 detected
 			
 	}
 
-	
+	/*test genPoints() (Dealer)*/
 	@Test
-	public void getPointsTest() {	//test getPoints for dealer
+	public void generatePointsTest() {	//test genPoints for dealer
 		
 		Game game = new Game();		
 		assertEquals("game.genPoints should return '1'", 1, game.dealer.genPoints("A"));
@@ -271,6 +276,7 @@ public class GameTest {
 	}
 	
 	
+	/*test cardGen() (Dealer)*/
 	@Test
 	public void cardGenTest() {	//test card generation from input string
 		
@@ -289,11 +295,42 @@ public class GameTest {
 		assertEquals("rank should be 10", "10", game.dealer.dealerCards.get(0).getRank());
 		assertEquals("suit should be S", "S", game.dealer.dealerCards.get(0).getSuit());
 		assertEquals("should be face up", true, game.dealer.dealerCards.get(0).getFaceUp());
-		assertEquals("should be 10", 10, game.dealer.dealerCards.get(0).getPoints());
-		
-		
+		assertEquals("should be 10", 10, game.dealer.dealerCards.get(0).getPoints());		
 	}
 	
 	
-	
+	/*test dealerPlay() (Game)*/
+	@Test
+	public void dealerPlayTest() {	//test dealer's autoplay abilities
+		
+		Game game = new Game();
+		game.dealer.dealerCards.add(new Card("2", 2, true, "S"));
+		game.dealer.dealerCards.add(new Card("3", 3, true, "H"));
+		game.dealer.updateScore();
+		game.dealer.deck.add(new Card("5", 5, true, "S"));
+		assertEquals("dealer's points should be 5", 5, game.dealer.getScore());
+		assertEquals("dealer should have 2 cards", 2, game.dealer.dealerCards.size());
+
+		game.dealerPlay();
+		game.dealer.updateScore();
+		assertEquals("dealer's points should now be 10", 10, game.dealer.getScore());
+		assertEquals("dealer should now have 3 cards", 3, game.dealer.dealerCards.size());
+		game.dealer.dealerCards.clear();
+		
+		game.dealer.dealerCards.add(new Card("10", 10, true, "S"));
+		game.dealer.dealerCards.add(new Card("9", 9, true, "H"));
+		game.dealer.updateScore();
+		assertEquals("dealer's points should be 19", 19, game.dealer.getScore());
+		assertEquals("dealer should have two cards", 2, game.dealer.dealerCards.size());
+		game.dealer.deck.add(new Card("5", 5, true, "S"));
+		game.dealerPlay();
+		assertEquals("dealer's points should still be 19", 19, game.dealer.getScore());
+		assertEquals("dealer should still have two cards", 2, game.dealer.dealerCards.size());
+
+		game.dealerPlay();
+		
+		
+		
+		
+	}
 }
