@@ -183,7 +183,7 @@ public class Game {
 		int numCardsPrinted = 0;
 		for(int i = 0; i < dealer.dealerCards.size(); i++){
 			if(dealer.dealerCards.get(i).getFaceUp()==true) {
-				System.out.println(dealer.dealerCards.get(i).getRank() + "" + dealer.dealerCards.get(i).getSuit());
+				System.out.print(dealer.dealerCards.get(i).getRank() + "" + dealer.dealerCards.get(i).getSuit() + " ");
 				numCardsPrinted++;
 			}
 		}
@@ -192,9 +192,20 @@ public class Game {
 	
 	
 	public int printPlayerCards() {
-		return 0;
+		int numCardsPrinted = 0;
+		
+		for(int i = 0; i < player.playerCards.size(); i++){
+			//if(player.playerCards.get(i).getFaceUp()==true) {
+				System.out.print(player.playerCards.get(i).getRank() + "" + player.playerCards.get(i).getSuit() + " ");
+				numCardsPrinted++;
+			//}
+		}
+		return numCardsPrinted;
 	}
 	
+	public int printPlayerScore() {
+		return player.getScore();	//for tester only
+	}
 		public static void main (String [] args) {
 			
 			
@@ -222,12 +233,7 @@ public class Game {
 				System.out.println("Player's score: " + game.player.getScore());
 				System.out.println("Dealer's cards: ");
 				game.printDealerCards();
-				/*for(int i = 0; i < game.dealer.dealerCards.size(); i++) {
-					if(game.dealer.dealerCards.get(i).getFaceUp() == true) {
-						System.out.println(game.dealer.dealerCards.get(i).getRank() + "" + game.dealer.dealerCards.get(i).getSuit());
-						game.dealer.updateScore();
-					}
-				}*/
+				System.out.println("");
 				game.dealer.updateScore();
 				System.out.println("Dealer score: " + game.dealer.getScore());
 
@@ -256,9 +262,7 @@ public class Game {
 						game.hit();
 						System.out.println("Player hits");
 						System.out.println("Player's cards: ");
-						for(int i = 0; i < game.getPlayerCardsSize(); i++) {
-							System.out.print(game.player.playerCards.get(i).getRank() + "" + game.player.playerCards.get(i).getSuit() + " ");
-						}
+						game.printPlayerCards();
 						System.out.println("");
 						game.player.updateScore();
 						System.out.println("Player's score: " + game.player.getScore());						
@@ -270,9 +274,7 @@ public class Game {
 						game.stand();
 						System.out.println("Player stands");
 						System.out.println("Player's cards: ");
-						for(int i = 0; i < game.getPlayerCardsSize(); i++) {
-							System.out.print(game.player.playerCards.get(i).getRank() + "" + game.player.playerCards.get(i).getSuit() + " ");
-						}
+						game.printPlayerCards();
 						System.out.println("");
 						game.player.updateScore();						
 						System.out.println("Player's score: " + game.player.getScore());
@@ -282,12 +284,7 @@ public class Game {
 					game.dealer.flipCard();		 			
 					game.dealerPlay();
 					System.out.println("Dealer's cards: ");
-					for(int i = 0; i < game.dealer.dealerCards.size(); i++) {
-						if(game.dealer.dealerCards.get(i).getFaceUp() == true) {
-							System.out.print(game.dealer.dealerCards.get(i).getRank() + "" + game.dealer.dealerCards.get(i).getSuit() + " ");
-							game.dealer.updateScore();
-						}
-					}
+					game.printDealerCards();
 					System.out.println("");
 					System.out.println("Dealer score: " + game.dealer.getScore());					
 					win = game.winCheck();	//only check for win AFTER player and dealer have moved
@@ -313,12 +310,12 @@ public class Game {
 				int dealerHitFlag = 0;
 				int playerCommandFlag = 0;	//1 if a player command is seen
 				boolean playerEndTurn = false;
-					input.nextLine();
-					System.out.println("Enter file path: ");
-				filePath = input.nextLine();
+					//input.nextLine();
+				//	System.out.println("Enter file path: ");
+			//	filePath = input.nextLine();
 				try {
-					//f = new Scanner(new File("C:\\Users\\User\\Documents\\file.txt"));	
-					f = new Scanner(new File(filePath));	//C:\\Users\\User\\assignment1\\file.txt
+					f = new Scanner(new File("C:\\Users\\User\\Documents\\file.txt"));	
+					//f = new Scanner(new File(filePath));	//C:\\Users\\User\\assignment1\\file.txt
 				while(f.hasNext()) {
 					fileContents.add(f.next());
 				}
@@ -334,9 +331,7 @@ public class Game {
 						if(i == 1) {
 						game.player.playerCards.addAll(	game.dealer.dealToPlayer());
 							System.out.println("Player's cards: ");
-							for(int j = 0; j < game.getPlayerCardsSize(); j++) {
-								System.out.print(game.player.playerCards.get(j).getSuit() + "" + game.player.playerCards.get(j).getRank() + " ");
-							}
+							game.printPlayerCards();
 							System.out.println("");
 							game.player.updateScore();
 							System.out.println("Player's score: " + game.player.getScore());							
@@ -351,11 +346,7 @@ public class Game {
 						if(i == 3) {
 							game.dealer.dealToSelf();
 							System.out.println("Dealer's cards: ");
-							for(int k = 0; k < game.dealer.dealerCards.size(); k++) {
-								if(game.dealer.dealerCards.get(k).getFaceUp() == true) {
-									System.out.print(game.dealer.dealerCards.get(k).getSuit() + "" + game.dealer.dealerCards.get(k).getRank() + " ");
-								}
-							}
+							game.printDealerCards();
 							System.out.println("");
 							game.dealer.flipCard();
 							game.dealer.updateScore();
@@ -375,9 +366,7 @@ public class Game {
 						game.hit();
 						System.out.println("Player hits");
 						System.out.println("Player's cards: ");
-						for(int j = 0; j < game.getPlayerCardsSize(); j++) {
-							System.out.print(game.player.playerCards.get(j).getSuit() + "" + game.player.playerCards.get(j).getRank() + " ");
-						}
+						game.printPlayerCards();
 						System.out.println("");
 						game.player.updateScore();
 						System.out.println("Player's score: " + game.player.getScore());													
@@ -385,30 +374,27 @@ public class Game {
 						playerEndTurn = true;
 						System.out.println("Player stands");
 						System.out.println("Player's cards: ");
-						for(int j = 0; j < game.getPlayerCardsSize(); j++) {
-							System.out.print(game.player.playerCards.get(j).getSuit() + "" + game.player.playerCards.get(j).getRank() + " ");
-						}
+						game.printPlayerCards();
 						System.out.println("");
 						game.player.updateScore();
 						System.out.println("Player's score: " + game.player.getScore());																		
 						game.dealer.flipCard();
+						System.out.println("Dealer's cards: ");
+						game.printDealerCards();
+						System.out.println("");
 						if(game.softCheck()== true || game.dealer.getScore() <=16) {
 							game.dealer.deck.add(game.dealer.cardGen(fileContents.get(i+1)));
 							game.dealerHit();
 							System.out.println("Dealer hits");
-							for(int j = 0; j < game.dealer.dealerCards.size(); j++) {
-								System.out.print(game.dealer.dealerCards.get(j).getSuit() + "" + game.dealer.dealerCards.get(j).getRank() + " ");
-							}
-							
+							System.out.println("Dealer's cards");
+							game.printDealerCards();
 							System.out.println("");
 							game.dealer.updateScore();
 							System.out.println("Dealer's score: " + game.dealer.getScore());												
 						}else {
 							System.out.println("Dealer stands");
-							for(int j = 0; j < game.dealer.dealerCards.size(); j++) {
-								System.out.print(game.dealer.dealerCards.get(j).getSuit() + "" + game.dealer.dealerCards.get(j).getRank() + " ");
-
-							}							
+							System.out.println("Dealer's cards");
+							game.printDealerCards();
 							System.out.println("");
 							game.dealer.updateScore();
 							System.out.println("Dealer's score: " + game.dealer.getScore());												

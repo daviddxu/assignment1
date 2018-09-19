@@ -393,6 +393,6 @@ public class GameTest {
 		game.player.playerCards.add(new Card("A", 1, true, "S"));
 		game.player.playerCards.add(new Card("A", 1, true, "D"));
 		
-		assertEquals("printDealerCards should return 1", 1, game.printPlayerCards());
+		assertEquals("printDealerCards should return 2", 1, game.printPlayerCards());
 	}
 }
