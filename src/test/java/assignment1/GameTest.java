@@ -374,8 +374,16 @@ public class GameTest {
 
 		game.dealerPlay();
 		
+	}
+	
+	/*test printDealerCards() (Game)*/
+	public void printDealerCardstest() {
 		
+		Game game = new Game();
+		game.dealer.dealerCards.add(new Card("A", 1, true, "S"));
+		game.dealer.dealerCards.add(new Card("A", 1, true, "D"));
 		
+		assertEquals("printDealerCards should return 1", 1, game.printDealerCards());
 		
 	}
 }

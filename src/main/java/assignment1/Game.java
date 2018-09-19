@@ -114,7 +114,24 @@ public class Game {
 	
 	public boolean aceCheck() {	//check if player and dealer will bust if an ace's points are set to 11; called if player or dealer is dealt an Ace or if the dealer flips up an Ace
 				
-
+		for(int i = 0; i < dealer.dealerCards.size(); i++) {
+			if(dealer.dealerCards.get(i).getRank().compareTo("A")==0) {
+				if(dealer.getScore() + 11 <= 21) {	//if dealer score is favoured by Ace being worth 11  
+					dealer.dealerCards.get(i).setPoints(11);
+					return true;
+				}
+			}
+		}
+		
+		for(int j = 0; j < player.playerCards.size(); j++) {
+			if(player.playerCards.get(j).getRank().compareTo("A") == 0) {
+				if(player.getScore() + 11 <= 21) {	//if dealer score is favoured by Ace being worth 11  
+					player.playerCards.get(j).setPoints(11);
+					return true;
+				}
+			}
+		}
+		
 		
 		
 		return false;				
@@ -162,6 +179,14 @@ public class Game {
 		return 0;
 	}
 	
+	public int printDealerCards() {
+		return 0;
+	}
+	
+	public int printPlayerCards() {
+		return 0;
+	}
+	
 		public static void main (String [] args) {
 			
 			
@@ -188,12 +213,14 @@ public class Game {
 				System.out.println("");
 				System.out.println("Player's score: " + game.player.getScore());
 				System.out.println("Dealer's cards: ");
-				for(int i = 0; i < game.dealer.dealerCards.size(); i++) {
+				game.printDealerCards();
+				/*for(int i = 0; i < game.dealer.dealerCards.size(); i++) {
 					if(game.dealer.dealerCards.get(i).getFaceUp() == true) {
 						System.out.println(game.dealer.dealerCards.get(i).getRank() + "" + game.dealer.dealerCards.get(i).getSuit());
 						game.dealer.updateScore();
 					}
-				}
+				}*/
+				game.dealer.updateScore();
 				System.out.println("Dealer score: " + game.dealer.getScore());
 
 				input.nextLine();
