@@ -229,6 +229,33 @@ public class GameTest {
 		return true;
 	}
 	
+	/*test aceCheck() (Game)*/
+	@Test
+	public void aceCheckTest() {
+		Game game = new Game();
+		
+		game.dealer.dealerCards.add(new Card("A", 1, true, "S"));
+		assertEquals("Ace should equal 1", 1, game.dealer.dealerCards.get(0).getPoints());
+		game.aceCheck();
+		assertEquals("Ace should equal 11", 11, game.dealer.dealerCards.get(0).getPoints());
+		game.dealer.dealerCards.add(new Card("A", 1, true, "H"));
+		game.aceCheck();
+		assertEquals("New Ace should equal 1", 1, game.dealer.dealerCards.get(1).getPoints());
+		game.dealer.updateScore();
+		assertEquals("total points should be 12", 12, game.dealer.getScore());		//one Ace is 11 points the other is 1 point
+		game.dealer.dealerCards.clear();
+		game.dealer.dealerCards.add(new Card("A", 1, true, "S"));
+		game.dealer.dealerCards.add(new Card("A", 11, true, "H"));
+		game.dealer.dealerCards.add(new Card("J", 10, true, "H"));
+		game.aceCheck();
+		
+		game.dealer.updateScore();
+		assertEquals("total points should be 12", 12, game.dealer.getScore());		//both aces are 1 point to avoid busting
+		
+		
+		
+		
+	}
 	/*test updateScore() (Dealer)*/
 	@Test
 	public void updateDealerScoreTest() {	//test updateScore in Dealer class
