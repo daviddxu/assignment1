@@ -30,6 +30,7 @@ public class Player {
 		this.score = newScore;
 	}
 	
+
 	public boolean aceCheck() {	//return true if an Ace's points are changed to 11, false otherwise	[DEPRECATED]
 		
 		return false;

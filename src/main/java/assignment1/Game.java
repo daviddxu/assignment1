@@ -30,34 +30,8 @@ public class Game {
 	}
 	public int winCheck() {	//check dealer then player for win conditions	1 for dealer win, 2 for player win
 		
-		 if(bustCheck() == 1) {
-			System.out.println("Player has busted with a score of " + player.getScore());
-			return 1;
-		}
-		 else if(bustCheck()==2) {
-			 System.out.println("Dealer has busted with a score of " + dealer.getScore());
-			return 2;
-		 }
-		else if(player.getScore() < 21 && dealer.getScore() < 21) {
-			//System.out.println("UPPER RUNS");
-			if(dealer.getScore() >= player.getScore()) {
-				return 1;
-			}else if(player.getScore()> dealer.getScore()) {
-				return 2;
-			}
-		}
-		
-	/*	else if (bustCheck() == 2) {
-			System.out.println("Dealer has busted with a score of " + dealer.getScore());
-			return 2;
-		}*//*else if(player.getScore() < 21 && dealer.getScore() < 21) {
-			
-			System.out.println("LOWER RUNS");
-			if(player.getScore() > dealer.getScore()) {
-				return 2;
-			}
-		}*/
-		
+
+		 		
 		return 0;
 	}
 	public void hit() {
@@ -308,11 +282,7 @@ public class Game {
 			
 				
 				
-			}else if (choice == 2) {	//file input
-				/*PLACEHOLDER*/
-				//System.out.println("NOT IMPLEMENTED");
-				//BufferedReader in = null;
-				//FileReader file = null;
+			}else if (choice == 2) {	//file input			
 				Scanner f;
 				String filePath = null;
 				ArrayList <String> fileContents = new ArrayList<String>();
@@ -395,7 +365,6 @@ public class Game {
 						game.player.updateScore();
 						System.out.println("Player's score: " + game.player.getScore());													
 					}else if(fileContents.get(i).equals("S") || playerEndTurn == true) {	//player stands -> dealer autoplays with card at i+1 (unsafe)
-						//playerCommandFlag =1;
 						playerEndTurn = true;
 						System.out.println("Player stands");
 						System.out.println("Player's cards: ");
@@ -436,22 +405,12 @@ public class Game {
 					System.out.println("Player wins");
 				}
 				
-				
-				//if(i == fileContents.size()) {
 				if(game.winCheck()==1) {
 					System.out.println("Dealer Wins");
 				}else if(game.winCheck()==2) {
 					System.out.println("Player wins");
 				}
-				//}
-				//winFlag = game.winCheck();
-				//System.out.println("Win flag: " + winFlag);
-				
-				/*if(winFlag == 1) {
-					System.out.println("Dealer wins");
-				}else if(winFlag == 2) {
-					System.out.println("Player wins");
-				}*/							
+						
 			}
 		}
 }
