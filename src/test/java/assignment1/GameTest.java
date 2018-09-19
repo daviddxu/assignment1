@@ -386,4 +386,13 @@ public class GameTest {
 		assertEquals("printDealerCards should return 1", 1, game.printDealerCards());
 		
 	}
+	
+	/*test printPlayerCards() (Game)*/
+	public void printPlayerCardsTest() {
+		Game game = new Game();
+		game.player.playerCards.add(new Card("A", 1, true, "S"));
+		game.player.playerCards.add(new Card("A", 1, true, "D"));
+		
+		assertEquals("printDealerCards should return 1", 1, game.printPlayerCards());
+	}
 }

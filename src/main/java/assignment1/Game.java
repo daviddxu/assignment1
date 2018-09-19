@@ -180,8 +180,16 @@ public class Game {
 	}
 	
 	public int printDealerCards() {
-		return 0;
+		int numCardsPrinted = 0;
+		for(int i = 0; i < dealer.dealerCards.size(); i++){
+			if(dealer.dealerCards.get(i).getFaceUp()==true) {
+				System.out.println(dealer.dealerCards.get(i).getRank() + "" + dealer.dealerCards.get(i).getSuit());
+				numCardsPrinted++;
+			}
+		}
+		return numCardsPrinted;
 	}
+	
 	
 	public int printPlayerCards() {
 		return 0;
