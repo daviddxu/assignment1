@@ -30,7 +30,29 @@ public class Game {
 	}
 	public int winCheck() {	//check dealer then player for win conditions	1 for dealer win, 2 for player win
 		
-
+		 if(bustCheck() == 1) {
+			System.out.println("Player has busted with a score of " + player.getScore());
+			return 1;
+		}
+		 else if(bustCheck()==2) {
+			 System.out.println("Dealer has busted with a score of " + dealer.getScore());
+			return 2;
+		 }
+		else if(player.getScore() < 21 && dealer.getScore() < 21) {
+			if(dealer.getScore() >= player.getScore()) {
+				return 1;
+			}else if(player.getScore()> dealer.getScore()) {
+				return 2;
+			}
+		}else if(blackJackTest()==1) {
+			return 1;
+		}else if(blackJackTest() == 2) {
+			return 2;
+		}else if(dealer.getScore()==21) {
+			return 1;
+		}else if(player.getScore()==21) {
+			return 2;
+		}
 		 		
 		return 0;
 	}
