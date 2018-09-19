@@ -209,10 +209,13 @@ public class Dealer {
 			
 			if(cardStr.contains("10")) {
 				if(cardStr.charAt(0) == 'S') {
+				//	System.out.println("this ran");
 					rank = "10";
 					points = 10;
 					suit = "S";
 					newCard = new Card(rank, points, faceUp, suit);
+				//	System.out.println("CardGen Rank: " + newCard.getRank());
+					
 					return newCard;
 				}
 				else if(cardStr.charAt(0) == 'D') {

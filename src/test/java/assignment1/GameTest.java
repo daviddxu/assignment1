@@ -241,8 +241,7 @@ public class GameTest {
 	public void cardGenTest() {
 		
 		Game game = new Game();
-		String cardStr = "KS";
-		Card c1 = game.dealer.cardGen(cardStr);
+		Card c1 = game.dealer.cardGen("SK");
 		game.dealer.dealerCards.add(c1);
 
 		
@@ -250,5 +249,22 @@ public class GameTest {
 		assertEquals("suit should be S", "S", game.dealer.dealerCards.get(0).getSuit());
 		assertEquals("should be face up", true, game.dealer.dealerCards.get(0).getFaceUp());
 		assertEquals("should be 10", 10, game.dealer.dealerCards.get(0).getPoints());
+		game.dealer.dealerCards.clear();
+		
+		Card c2 = game.dealer.cardGen("S10");
+		game.dealer.dealerCards.add(c2);
+		System.out.println(game.dealer.dealerCards.get(0).getRank());
+		assertEquals("rank should be 10", "10", game.dealer.dealerCards.get(0).getRank());
+		assertEquals("suit should be S", "S", game.dealer.dealerCards.get(0).getSuit());
+		assertEquals("should be face up", true, game.dealer.dealerCards.get(0).getFaceUp());
+		assertEquals("should be 10", 10, game.dealer.dealerCards.get(0).getPoints());
+		
+		
+		
+	
+	
 	}
+	
+	
+	
 }

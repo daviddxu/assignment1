@@ -24,6 +24,8 @@ public class Card {
 		this.points = points;
 		this.faceup = faceup;
 		this.suit = suit;
+		
+		//System.out.println("this.rank: " + this.rank);
 	}
 	
 	public String getRank() {
@@ -32,7 +34,7 @@ public class Card {
 	
 	public void setRank(String rank) {		
 		this.rank = rank;
-	}
+ 	}
 	
 	public int getPoints() {
 		return points;

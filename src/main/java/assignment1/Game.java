@@ -33,7 +33,7 @@ public class Game {
 		if(dealer.getScore() == 21) {
 			return 1;
 		}else if(blackJackTest()==1) {
-			System.out.println("Dealer has a blackjack");
+			//System.out.println("Dealer has a blackjack");
 			return 1;
 		}else if(player.getScore() > 21) {
 			System.out.println("Player has busted with a score of " + player.getScore());
@@ -42,7 +42,7 @@ public class Game {
 			return 2;
 		}
 		else if(blackJackTest()==2) {
-			System.out.println("Player has a blackjack");
+			//System.out.println("Player has a blackjack");
 			return 2;
 		}else if (dealer.getScore() >21 ) {
 			System.out.println("Dealer has busted with a score of " + dealer.getScore());
@@ -64,7 +64,7 @@ public class Game {
 	}
 	
 	public void dealerPlay() {
-		if(softCheck() == true || dealer.getDealerCardsSize() <= 16) {
+		if(softCheck() == true || dealer.getScore() <= 16) {	//if soft 17 or dealer points <= 16
 			System.out.println("Dealer hits");
 			dealerHit();
 		}else {
@@ -281,44 +281,195 @@ public class Game {
 				/*PLACEHOLDER*/
 				//System.out.println("NOT IMPLEMENTED");
 				BufferedReader in = null;
-				
-				String file;
-				String temp = null;
-				ArrayList <String> fileInput = new ArrayList<String>();
-				
-				
-				/*
-				 * TO DO: Make a CardFactory method in Game class to process SK, JD, etc. and relevant testers
-				 * 
-				 */
-				//WHILE EOF NOT REACHED
+				FileReader file = null;
+				Scanner f;
+				String filePath = null;
+				ArrayList <String> fileContents = new ArrayList<String>();
+				ArrayList <String> subList = new ArrayList<String>();
+				int flag1 = 0;
+				int flag2 = 0;
+				int winFlag = 0;
+				int dealerHitFlag = 0;
+				int playerCommandFlag = 0;	//1 if a player command is seen
+				boolean playerCommandsLeft = true;
+				//	input.nextLine();
+				//	System.out.println("Enter file path: ");
+				//filePath = input.nextLine();
 				try {
-					while((file = in.readLine()) != null) {
-						Scanner scanner = new Scanner(file);
-						temp = scanner.next();
-						//read everything in the file into an ArrayList (separate at whitespace)
-							
-					}
-				} catch (IOException e) {
+					f = new Scanner(new File("C:\\Users\\User\\Documents\\file.txt"));
+				
+			//	String temp = null;
+				
+				while(f.hasNext()) {
+					fileContents.add(f.next());
+				}
+				f.close();
+				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				for(int i = 0; i < fileInput.size(); i++) {
+				/*CONSTANT OPERATIONS ARE HARDCODED*/
+				for(int i = 0; i < fileContents.size(); i++) {	//game can only go as long as the number of commands in the text file
+					if(i==0 || i == 1) {					
+						game.dealer.deck.add(game.dealer.cardGen(fileContents.get(i)));						
+						if(i == 1) {
+						game.player.playerCards.addAll(	game.dealer.dealToPlayer());
+							System.out.println("Player's cards: ");
+							for(int j = 0; j < game.getPlayerCardsSize(); j++) {
+								System.out.print(game.player.playerCards.get(j).getRank() + "" + game.player.playerCards.get(j).getSuit() + " ");
+							}
+							System.out.println("");
+							game.player.updateScore();
+							System.out.println("Player's score: " + game.player.getScore());							
+							/*if(game.blackJackTest() == 2 && flag1 == 0) {
+								System.out.println("Player has a blackjack");
+								flag1 = 1;
+							}*/
+						}
+					}					
+					if(i==2 || i == 3) {
+						game.dealer.deck.add(game.dealer.cardGen(fileContents.get(i)));
+						if(i == 3) {
+							game.dealer.dealToSelf();
+							System.out.println("Dealer's cards: ");
+							for(int k = 0; k < game.dealer.dealerCards.size(); k++) {
+								if(game.dealer.dealerCards.get(k).getFaceUp() == true) {
+									System.out.print(game.dealer.dealerCards.get(k).getRank() + "" + game.dealer.dealerCards.get(k).getSuit() + " ");
+								}
+							}
+							System.out.println("");
+							game.dealer.updateScore();
+							System.out.println("Dealer's score: " + game.dealer.getScore());							
+							/*if(game.blackJackTest()==1 && flag2==0) {
+								System.out.println("Dealer has a blackjack");
+								flag2 = 1;
+							}*/
+						
+						}
+					}
+								
+					if(fileContents.get(i).equals("H")) {	//player hits with card at i+1-> dealer autoplays with card at i+1 (unsafe)
+						//prepare card
+						//playerCommandFlag =1;
+						game.dealer.deck.add(game.dealer.cardGen(fileContents.get(i+1)));	//this is unsafe
+						game.hit();
+						System.out.println("Player hits");
+						System.out.println("Player's cards: ");
+						for(int j = 0; j < game.getPlayerCardsSize(); j++) {
+							System.out.print(game.player.playerCards.get(j).getRank() + "" + game.player.playerCards.get(j).getSuit() + " ");
+						}
+						System.out.println("");
+						game.player.updateScore();
+						System.out.println("Player's score: " + game.player.getScore());							
+						/*if(game.blackJackTest() == 2 && flag1 == 0) {
+							System.out.println("Player has a blackjack");
+							flag1 = 1;
+						}*/
+						
+						
+						
+					}else if(fileContents.get(i).equals("S")) {	//player stands -> dealer autoplays with card at i+1 (unsafe)
+						//playerCommandFlag =1;
+						System.out.println("Player stands");
+						System.out.println("Player's cards: ");
+						for(int j = 0; j < game.getPlayerCardsSize(); j++) {
+							System.out.print(game.player.playerCards.get(j).getRank() + "" + game.player.playerCards.get(j).getSuit() + " ");
+						}
+						System.out.println("");
+						game.player.updateScore();
+						System.out.println("Player's score: " + game.player.getScore());							
+					/*	if(game.blackJackTest() == 2 && flag1 == 0) {
+							System.out.println("Player has a blackjack");
+							flag1 = 1;
+						}*/
+						
+						game.dealer.flipCard();
+						if(game.softCheck()== true || game.dealer.getScore() <=16) {
+							game.dealer.deck.add(game.dealer.cardGen(fileContents.get(i+1)));
+							game.dealerHit();
+							System.out.println("Dealer hits");
+							for(int j = 0; j < game.dealer.dealerCards.size(); j++) {
+								System.out.print(game.dealer.dealerCards.get(j).getRank() + "" + game.dealer.dealerCards.get(j).getSuit() + " ");
+
+							}
+							
+							System.out.println("");
+							game.dealer.updateScore();
+							System.out.println("Dealer's score: " + game.dealer.getScore());							
+						/*	if(game.blackJackTest()==1 && flag2==0) {
+								System.out.println("Dealer has a blackjack");
+								flag2 = 1;
+							}*/
+						}else {
+							System.out.println("Dealer stands");
+							for(int j = 0; j < game.dealer.dealerCards.size(); j++) {
+								System.out.print(game.dealer.dealerCards.get(j).getRank() + "" + game.dealer.dealerCards.get(j).getSuit() + " ");
+
+							}
+							
+							System.out.println("");
+							game.dealer.updateScore();
+							System.out.println("Dealer's score: " + game.dealer.getScore());							
+						/*	if(game.blackJackTest()==1 && flag2==0) {
+								System.out.println("Dealer has a blackjack");
+								flag2 = 1;
+							}*/
+						}
+					}
 					
-					//if i = 0 || 1 -> deal those cards to player
-					//if i = 2 || 3 -> deal those cards to dealer
-					//if fileInput.get(i) == 'h' -> player hits -> dealer autoplays with next card (may cause unhandled exception if i+1)
-					//if fileInput.get(i) == 's' -> player stands -> ''
+					
+					
+				/*	if(playerCommandFlag==1) {
+						//dealer's turn: only moves after there are no more player instructions left in the list
+						for(int j = i; j < fileContents.size(); j++) {
+							subList.add(fileContents.get(j));
+						}
+					
+						for(int j = 0; j < subList.size(); j++) {
+							if(subList.get(j).equals("H") || subList.get(j).equals("S")) {
+								playerCommandsLeft = true;
+							}else {
+								playerCommandsLeft = false;
+							}
+						}
+						subList.clear();
+					
+					}*/
+					
+				/*	if(game.softCheck()==true||game.dealer.getScore()<=16) {
+						System.out.println("Dealer Hits");
+						int l = i+1;
+						game.dealer.deck.add(game.dealer.cardGen(fileContents.get(l)));
+						game.dealerHit();
+						dealerHitFlag =1; 	//dealer has hit
+						
+					}else {
+						System.out.println("Dealer stands");
+ 					}*/
 					
 				}
-					//FIRST TWO CARDS ARE DEALT TO PLAYER
-					//NEXT TWO CARDS ARE DEALT TO DEALER
-						//SCORE CHECK- IF WINNER DETECTED END GAME
-							//OTHERWISE CHECK FOR H (HIT) OR S (STAND)
-								//IF H- HIT AND DEALER AUTO PLAYS
-								//IF S- PLAYER STANDS AND DEALER AUTO PLAYS
-							//SCORE CHECK - IF WINNER DETECTED END GAME
+				
+				/*if(game.blackJackTest()==2) {
+					System.out.println("Player has a blackjack");
+				}else if(game.blackJackTest()==1) {
+					System.out.println("Dealer has a blackjack");
+				}*/
+				
+				/*Check for win after the file contents are processed*/
+				/*if(game.winCheck()== 1) {
+					System.out.println("Dealer wins");
+					return;
+				}else if(game.winCheck()==2) {
+					System.out.println("Player wins");
+					return;
+				}*/
+				winFlag = game.winCheck();
+				if(winFlag == 1) {
+					System.out.println("Dealer wins");
+				}else if(winFlag == 2) {
+					System.out.println("Player wins");
+				}
+ 			
 				
 			}
 		}
