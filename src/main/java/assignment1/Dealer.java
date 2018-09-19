@@ -132,9 +132,9 @@ public class Dealer {
 	int newScore = 0;
 		
 		for(int i = 0; i < dealerCards.size(); i++) {			
-			if(dealerCards.get(i).getFaceUp() == true) {
+		//	if(dealerCards.get(i).getFaceUp() == true) {
 				newScore += dealerCards.get(i).getPoints();
-			}
+			//}
 		}
 		this.score = newScore;
 	}

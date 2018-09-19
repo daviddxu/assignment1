@@ -223,8 +223,8 @@ public class Game {
 				input.nextLine();
 				
 				//check for blackjack after cards dealt to player and dealer
-				game.dealer.flipCard();
-				game.dealer.updateScore();
+				//game.dealer.flipCard();
+			//	game.dealer.updateScore();
 				
 				if(game.blackJackTest()==2) {
 					//win =2;
