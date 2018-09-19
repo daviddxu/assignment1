@@ -58,17 +58,21 @@ public class Game {
 		player.updateScore();	
 	}
 	
-	public void dealerHit() {	//dealer's hit
-		
+	public void dealerHit() {	//dealer's hit		
 		dealer.flipCard();
 		aceCheck();
 		dealer.dealerCards.add(dealer.hit());
 		dealer.updateScore();
 	}
 	
-	public void dealerPlay() {
-		
-	
+	public void dealerPlay() {		
+		if(softCheck() == true || dealer.getScore() <= 16) {	//if soft 17 or dealer points <= 16
+			System.out.println("Dealer hits");
+			dealerHit();
+		}else {
+			System.out.println("Dealer stands");
+			stand();
+		}
 	}
 	
 	public boolean softCheck() {	//check for soft 17 (where 11 points come from an Ace)
@@ -289,11 +293,12 @@ public class Game {
 				int dealerHitFlag = 0;
 				int playerCommandFlag = 0;	//1 if a player command is seen
 				boolean playerEndTurn = false;
-				//	input.nextLine();
-				//	System.out.println("Enter file path: ");
-				//filePath = input.nextLine();
+					input.nextLine();
+					System.out.println("Enter file path: ");
+				filePath = input.nextLine();
 				try {
-					f = new Scanner(new File("C:\\Users\\User\\Documents\\file.txt"));				
+					//f = new Scanner(new File("C:\\Users\\User\\Documents\\file.txt"));	
+					f = new Scanner(new File(filePath));	//C:\\Users\\User\\assignment1\\file.txt
 				while(f.hasNext()) {
 					fileContents.add(f.next());
 				}
@@ -393,14 +398,18 @@ public class Game {
 				
 				if(dealerBlackJack == true) {
 					System.out.println("Dealer wins");
+					return;
 				}else if(playerBlackJack  == true) {
 					System.out.println("Player wins");
+					return;
 				}
 				
 				if(game.winCheck()==1) {
 					System.out.println("Dealer Wins");
+					return;
 				}else if(game.winCheck()==2) {
 					System.out.println("Player wins");
+					return;
 				}
 						
 			}

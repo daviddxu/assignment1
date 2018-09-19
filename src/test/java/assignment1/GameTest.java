@@ -132,8 +132,13 @@ public class GameTest {
 		game.dealer.deck.remove(0);
 		game.dealerHit();
 		assertEquals("The dealer should now have three cards", 3, game.dealer.dealerCards.size());
-	}
+		game.dealer.deck.add(new Card("A", 1, true, "S"));
+		game.dealerHit();
+		assertEquals("The dealer should now have four cards", 4, game.dealer.dealerCards.size());
+
 	
+	}
+		
 	/*test blackJackTest for Player (Game) */
 	@Test
 	public void playerBlackjackTest() {	//test blackjack checker function: if a player has an ace and 10, J, Q, K, they win; check dealer first then player; 
@@ -160,6 +165,19 @@ public class GameTest {
 		assertEquals("The dealer should have blackjack (1)", 1, game.blackJackTest());
 				
 	}
+	
+	/*test blackJackTest for Dealer precedence (Game)*/
+	public void blackJackPrecedenceTest() {
+		Game game = new Game();
+		game.player.playerCards.add(new Card("A", 1, true, "S"));
+		game.player.playerCards.add(new Card("J", 10, true, "S"));
+		game.player.updateScore();
+		game.dealer.dealerCards.add(new Card("A", 1, true, "H"));
+		game.player.playerCards.add(new Card("J", 10, true, "H"));
+		game.dealer.updateScore();
+		assertEquals("dealer should win", 1, game.dealer.getScore());	//calls blackJackTest() (Game)
+	}
+	
 	
 	/*test genPoints() (Dealer)*/
 	@Test 
