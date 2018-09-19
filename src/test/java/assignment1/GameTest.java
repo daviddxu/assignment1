@@ -395,4 +395,22 @@ public class GameTest {
 		
 		assertEquals("printDealerCards should return 2", 1, game.printPlayerCards());
 	}
+	
+	/*test printPlayerScore() (Game)*/
+	public void printPlayerScoreTest() {
+		Game game = new Game();
+		game.player.playerCards.add(new Card("J", 10, true, "S"));
+		game.player.updateScore();
+		assertEquals("Player's score should be 10", 10, game.printPlayerScore());
+		
+	}
+	
+	/*test printDealerScore() (Game)*/
+	public void printDealerScoreTest() {
+		Game game = new Game();
+		game.dealer.dealerCards.add(new Card("J", 10, true, "S"));
+		game.dealer.updateScore();
+		assertEquals("Dealer's score should be 10", 10, game.printDealerScore());
+	}
+	
 }

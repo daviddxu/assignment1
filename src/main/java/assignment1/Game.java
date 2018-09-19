@@ -204,6 +204,8 @@ public class Game {
 	}
 	
 	public int printPlayerScore() {
+		System.out.println("Player's score: " + player.getScore());
+
 		return player.getScore();	//for tester only
 	}
 		public static void main (String [] args) {
