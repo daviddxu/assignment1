@@ -245,7 +245,7 @@ public class GameTest {
 		assertEquals("total points should be 12", 12, game.dealer.getScore());		//one Ace is 11 points the other is 1 point
 		game.dealer.dealerCards.clear();
 		game.dealer.dealerCards.add(new Card("A", 1, true, "S"));
-		game.dealer.dealerCards.add(new Card("A", 11, true, "H"));
+		game.dealer.dealerCards.add(new Card("A", 1, true, "H"));
 		game.dealer.dealerCards.add(new Card("J", 10, true, "H"));
 		game.aceCheck();
 		

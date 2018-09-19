@@ -114,7 +114,8 @@ public class Game {
 	
 	public boolean aceCheck() {	//check if player and dealer will bust if an ace's points are set to 11; called if player or dealer is dealt an Ace or if the dealer flips up an Ace
 				
-	
+
+		
 		
 		return false;				
 }
