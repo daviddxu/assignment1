@@ -30,24 +30,33 @@ public class Game {
 	}
 	public int winCheck() {	//check dealer then player for win conditions	1 for dealer win, 2 for player win
 		
-		if(dealer.getScore() == 21) {
-			return 1;
-		}else if(blackJackTest()==1) {
-			//System.out.println("Dealer has a blackjack");
-			return 1;
-		}else if(player.getScore() > 21) {
+		 if(bustCheck() == 1) {
 			System.out.println("Player has busted with a score of " + player.getScore());
 			return 1;
-		}else if(player.getScore() == 21) {
-			return 2;
 		}
-		else if(blackJackTest()==2) {
-			//System.out.println("Player has a blackjack");
+		 else if(bustCheck()==2) {
+			 System.out.println("Dealer has busted with a score of " + dealer.getScore());
 			return 2;
-		}else if (dealer.getScore() >21 ) {
+		 }
+		else if(player.getScore() < 21 && dealer.getScore() < 21) {
+			//System.out.println("UPPER RUNS");
+			if(dealer.getScore() >= player.getScore()) {
+				return 1;
+			}else if(player.getScore()> dealer.getScore()) {
+				return 2;
+			}
+		}
+		
+	/*	else if (bustCheck() == 2) {
 			System.out.println("Dealer has busted with a score of " + dealer.getScore());
 			return 2;
-		}
+		}*//*else if(player.getScore() < 21 && dealer.getScore() < 21) {
+			
+			System.out.println("LOWER RUNS");
+			if(player.getScore() > dealer.getScore()) {
+				return 2;
+			}
+		}*/
 		
 		return 0;
 	}
@@ -185,6 +194,8 @@ public class Game {
 			choice = input.nextInt();
 			String play = null;								
 			int win = 0;
+			boolean dealerHasBlackJack = false;
+			boolean playerHasBlackJack = false;
 			if(choice == 1) {	//console input
 				
 				game.dealer.createDeck();
@@ -198,7 +209,6 @@ public class Game {
 				game.player.updateScore();
 				System.out.println("");
 				System.out.println("Player's score: " + game.player.getScore());
-		//		System.out.println("");
 				System.out.println("Dealer's cards: ");
 				for(int i = 0; i < game.dealer.dealerCards.size(); i++) {
 					if(game.dealer.dealerCards.get(i).getFaceUp() == true) {
@@ -208,10 +218,30 @@ public class Game {
 				}
 				System.out.println("Dealer score: " + game.dealer.getScore());
 
-				win = game.winCheck();
-				System.out.println("win: " + win);
+				//win = game.winCheck();
+			//	System.out.println("win: " + win);
 				input.nextLine();
-			
+				
+				//check for blackjack after cards dealt to player and dealer
+				game.dealer.flipCard();
+				game.dealer.updateScore();
+				
+				if(game.blackJackTest()==2) {
+					//win =2;
+					System.out.println("Player has a blackjack");
+					playerHasBlackJack = true;
+				}
+				
+				if(game.blackJackTest()==1) {
+					System.out.println("Dealer has a blackjack");
+					dealerHasBlackJack = true;
+				}
+				
+				if(dealerHasBlackJack == true) {
+					win = 1;
+				}else if(playerHasBlackJack == true) {
+					win = 2;
+				}
 				while (win==0) {
 					
 					System.out.println("Enter 'h' to hit, 's' to stand");	//player's turn
@@ -225,8 +255,8 @@ public class Game {
 						}
 						System.out.println("");
 						game.player.updateScore();
-						win = game.winCheck();
-						System.out.println("win: " + win);
+						//win = game.winCheck();
+						//System.out.println("win: " + win);
 						System.out.println("Player's score: " + game.player.getScore());
 						
 						/*TEMP*/
@@ -248,7 +278,8 @@ public class Game {
 						System.out.println("Player's score: " + game.player.getScore());
 
 					}
-					//win = game.winCheck();
+					
+					/*Dealer's play*/
 					game.dealer.flipCard();		 			
 					game.dealerPlay();
 					System.out.println("Dealer's cards: ");
@@ -262,9 +293,9 @@ public class Game {
 					System.out.println("Dealer score: " + game.dealer.getScore());
 
 					
-					win = game.winCheck();
+					win = game.winCheck();	//only check for win AFTER player and dealer have moved
 					/*TEMP*/
-					if(win == 2) {
+					if(win == 1 ||win == 2) {
 						break;
 					}
 				}
@@ -280,18 +311,18 @@ public class Game {
 			}else if (choice == 2) {	//file input
 				/*PLACEHOLDER*/
 				//System.out.println("NOT IMPLEMENTED");
-				BufferedReader in = null;
-				FileReader file = null;
+				//BufferedReader in = null;
+				//FileReader file = null;
 				Scanner f;
 				String filePath = null;
 				ArrayList <String> fileContents = new ArrayList<String>();
 				ArrayList <String> subList = new ArrayList<String>();
-				int flag1 = 0;
-				int flag2 = 0;
+				boolean playerBlackJack = false;
+				boolean dealerBlackJack = false;
 				int winFlag = 0;
 				int dealerHitFlag = 0;
 				int playerCommandFlag = 0;	//1 if a player command is seen
-				boolean playerCommandsLeft = true;
+				boolean playerEndTurn = false;
 				//	input.nextLine();
 				//	System.out.println("Enter file path: ");
 				//filePath = input.nextLine();
@@ -316,15 +347,15 @@ public class Game {
 						game.player.playerCards.addAll(	game.dealer.dealToPlayer());
 							System.out.println("Player's cards: ");
 							for(int j = 0; j < game.getPlayerCardsSize(); j++) {
-								System.out.print(game.player.playerCards.get(j).getRank() + "" + game.player.playerCards.get(j).getSuit() + " ");
+								System.out.print(game.player.playerCards.get(j).getSuit() + "" + game.player.playerCards.get(j).getRank() + " ");
 							}
 							System.out.println("");
 							game.player.updateScore();
 							System.out.println("Player's score: " + game.player.getScore());							
-							/*if(game.blackJackTest() == 2 && flag1 == 0) {
+							if(game.blackJackTest() == 2) {
 								System.out.println("Player has a blackjack");
-								flag1 = 1;
-							}*/
+								playerBlackJack = true;
+							}
 						}
 					}					
 					if(i==2 || i == 3) {
@@ -334,143 +365,93 @@ public class Game {
 							System.out.println("Dealer's cards: ");
 							for(int k = 0; k < game.dealer.dealerCards.size(); k++) {
 								if(game.dealer.dealerCards.get(k).getFaceUp() == true) {
-									System.out.print(game.dealer.dealerCards.get(k).getRank() + "" + game.dealer.dealerCards.get(k).getSuit() + " ");
+									System.out.print(game.dealer.dealerCards.get(k).getSuit() + "" + game.dealer.dealerCards.get(k).getRank() + " ");
 								}
 							}
 							System.out.println("");
+							game.dealer.flipCard();
 							game.dealer.updateScore();
 							System.out.println("Dealer's score: " + game.dealer.getScore());							
-							/*if(game.blackJackTest()==1 && flag2==0) {
+							if(game.blackJackTest()==1 && dealerBlackJack == false) {
 								System.out.println("Dealer has a blackjack");
-								flag2 = 1;
-							}*/
+								dealerBlackJack = true;
+							}
 						
 						}
 					}
 								
-					if(fileContents.get(i).equals("H")) {	//player hits with card at i+1-> dealer autoplays with card at i+1 (unsafe)
+					if(fileContents.get(i).equals("H")) {	//player hits with card at i+1
 						//prepare card
 						//playerCommandFlag =1;
+						playerEndTurn = false;
 						game.dealer.deck.add(game.dealer.cardGen(fileContents.get(i+1)));	//this is unsafe
 						game.hit();
 						System.out.println("Player hits");
 						System.out.println("Player's cards: ");
 						for(int j = 0; j < game.getPlayerCardsSize(); j++) {
-							System.out.print(game.player.playerCards.get(j).getRank() + "" + game.player.playerCards.get(j).getSuit() + " ");
+							System.out.print(game.player.playerCards.get(j).getSuit() + "" + game.player.playerCards.get(j).getRank() + " ");
 						}
 						System.out.println("");
 						game.player.updateScore();
-						System.out.println("Player's score: " + game.player.getScore());							
-						/*if(game.blackJackTest() == 2 && flag1 == 0) {
-							System.out.println("Player has a blackjack");
-							flag1 = 1;
-						}*/
-						
-						
-						
-					}else if(fileContents.get(i).equals("S")) {	//player stands -> dealer autoplays with card at i+1 (unsafe)
+						System.out.println("Player's score: " + game.player.getScore());													
+					}else if(fileContents.get(i).equals("S") || playerEndTurn == true) {	//player stands -> dealer autoplays with card at i+1 (unsafe)
 						//playerCommandFlag =1;
+						playerEndTurn = true;
 						System.out.println("Player stands");
 						System.out.println("Player's cards: ");
 						for(int j = 0; j < game.getPlayerCardsSize(); j++) {
-							System.out.print(game.player.playerCards.get(j).getRank() + "" + game.player.playerCards.get(j).getSuit() + " ");
+							System.out.print(game.player.playerCards.get(j).getSuit() + "" + game.player.playerCards.get(j).getRank() + " ");
 						}
 						System.out.println("");
 						game.player.updateScore();
-						System.out.println("Player's score: " + game.player.getScore());							
-					/*	if(game.blackJackTest() == 2 && flag1 == 0) {
-							System.out.println("Player has a blackjack");
-							flag1 = 1;
-						}*/
-						
+						System.out.println("Player's score: " + game.player.getScore());																		
 						game.dealer.flipCard();
 						if(game.softCheck()== true || game.dealer.getScore() <=16) {
 							game.dealer.deck.add(game.dealer.cardGen(fileContents.get(i+1)));
 							game.dealerHit();
 							System.out.println("Dealer hits");
 							for(int j = 0; j < game.dealer.dealerCards.size(); j++) {
-								System.out.print(game.dealer.dealerCards.get(j).getRank() + "" + game.dealer.dealerCards.get(j).getSuit() + " ");
-
+								System.out.print(game.dealer.dealerCards.get(j).getSuit() + "" + game.dealer.dealerCards.get(j).getRank() + " ");
 							}
 							
 							System.out.println("");
 							game.dealer.updateScore();
-							System.out.println("Dealer's score: " + game.dealer.getScore());							
-						/*	if(game.blackJackTest()==1 && flag2==0) {
-								System.out.println("Dealer has a blackjack");
-								flag2 = 1;
-							}*/
+							System.out.println("Dealer's score: " + game.dealer.getScore());												
 						}else {
 							System.out.println("Dealer stands");
 							for(int j = 0; j < game.dealer.dealerCards.size(); j++) {
-								System.out.print(game.dealer.dealerCards.get(j).getRank() + "" + game.dealer.dealerCards.get(j).getSuit() + " ");
+								System.out.print(game.dealer.dealerCards.get(j).getSuit() + "" + game.dealer.dealerCards.get(j).getRank() + " ");
 
-							}
-							
+							}							
 							System.out.println("");
 							game.dealer.updateScore();
-							System.out.println("Dealer's score: " + game.dealer.getScore());							
-						/*	if(game.blackJackTest()==1 && flag2==0) {
-								System.out.println("Dealer has a blackjack");
-								flag2 = 1;
-							}*/
+							System.out.println("Dealer's score: " + game.dealer.getScore());												
 						}
-					}
-					
-					
-					
-				/*	if(playerCommandFlag==1) {
-						//dealer's turn: only moves after there are no more player instructions left in the list
-						for(int j = i; j < fileContents.size(); j++) {
-							subList.add(fileContents.get(j));
-						}
-					
-						for(int j = 0; j < subList.size(); j++) {
-							if(subList.get(j).equals("H") || subList.get(j).equals("S")) {
-								playerCommandsLeft = true;
-							}else {
-								playerCommandsLeft = false;
-							}
-						}
-						subList.clear();
-					
-					}*/
-					
-				/*	if(game.softCheck()==true||game.dealer.getScore()<=16) {
-						System.out.println("Dealer Hits");
-						int l = i+1;
-						game.dealer.deck.add(game.dealer.cardGen(fileContents.get(l)));
-						game.dealerHit();
-						dealerHitFlag =1; 	//dealer has hit
-						
-					}else {
-						System.out.println("Dealer stands");
- 					}*/
-					
+					}																			
+				}				//endfor
+				
+				if(dealerBlackJack == true) {
+					System.out.println("Dealer wins");
+				}else if(playerBlackJack  == true) {
+					System.out.println("Player wins");
 				}
 				
-				/*if(game.blackJackTest()==2) {
-					System.out.println("Player has a blackjack");
-				}else if(game.blackJackTest()==1) {
-					System.out.println("Dealer has a blackjack");
-				}*/
 				
-				/*Check for win after the file contents are processed*/
-				/*if(game.winCheck()== 1) {
-					System.out.println("Dealer wins");
-					return;
+				//if(i == fileContents.size()) {
+				if(game.winCheck()==1) {
+					System.out.println("Dealer Wins");
 				}else if(game.winCheck()==2) {
 					System.out.println("Player wins");
-					return;
-				}*/
-				winFlag = game.winCheck();
-				if(winFlag == 1) {
+				}
+				//}
+				//winFlag = game.winCheck();
+				//System.out.println("Win flag: " + winFlag);
+				
+				/*if(winFlag == 1) {
 					System.out.println("Dealer wins");
 				}else if(winFlag == 2) {
 					System.out.println("Player wins");
-				}
- 			
-				
+				}*/							
 			}
 		}
 }

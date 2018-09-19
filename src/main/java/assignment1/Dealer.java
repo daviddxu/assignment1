@@ -203,19 +203,15 @@ public class Dealer {
 		String suit = null;
 		boolean faceUp = true;
 		int points = -1;
-		
-		
+				
 		if(cardStr.length() != 2) {
 			
 			if(cardStr.contains("10")) {
 				if(cardStr.charAt(0) == 'S') {
-				//	System.out.println("this ran");
 					rank = "10";
 					points = 10;
 					suit = "S";
-					newCard = new Card(rank, points, faceUp, suit);
-				//	System.out.println("CardGen Rank: " + newCard.getRank());
-					
+					newCard = new Card(rank, points, faceUp, suit);									
 					return newCard;
 				}
 				else if(cardStr.charAt(0) == 'D') {
@@ -285,7 +281,7 @@ public class Dealer {
 			points =6;
 		}else if(cardStr.charAt(1) == '5') {
 			rank = "5";
-			points = 6;
+			points = 5;
 		}else if(cardStr.charAt(1) == '4') {
 			rank = "4";
 			points = 4;
