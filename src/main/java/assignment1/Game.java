@@ -131,9 +131,7 @@ public class Game {
 				}
 			}
 		}
-		
-		
-		
+				
 		return false;				
 }
 	
@@ -194,11 +192,10 @@ public class Game {
 	public int printPlayerCards() {
 		int numCardsPrinted = 0;
 		
-		for(int i = 0; i < player.playerCards.size(); i++){
-			//if(player.playerCards.get(i).getFaceUp()==true) {
+		for(int i = 0; i < player.playerCards.size(); i++){			
 				System.out.print(player.playerCards.get(i).getRank() + "" + player.playerCards.get(i).getSuit() + " ");
 				numCardsPrinted++;
-			//}
+			
 		}
 		return numCardsPrinted;
 	}
@@ -212,9 +209,8 @@ public class Game {
 		System.out.println("Dealer's score: " + dealer.getScore());
 		return dealer.getScore();
 	}
-		public static void main (String [] args) {
-			
-			
+	public static void main (String [] args) {
+					
 			Game game = new Game();
 			Scanner input = new Scanner(System.in);
 			int choice = 0;
@@ -224,28 +220,21 @@ public class Game {
 			int win = 0;
 			boolean dealerHasBlackJack = false;
 			boolean playerHasBlackJack = false;
-			if(choice == 1) {	//console input
-				
+			
+			if(choice == 1) {	//console input				
 				game.dealer.createDeck();
 				game.dealToPlayer();
-				game.dealToSelf();
-			
+				game.dealToSelf();			
 				System.out.println("Player's cards: " );
-			/*	for(int i = 0; i < game.getPlayerCardsSize(); i++) {
-					System.out.print(game.player.playerCards.get(i).getRank() + "" + game.player.playerCards.get(i).getSuit() + " ");
-				}*/
 				game.printPlayerCards();
 				game.player.updateScore();
 				System.out.println("");
 				game.printPlayerScore();
-			//	System.out.println("Player's score: " + game.player.getScore());
 				System.out.println("Dealer's cards: ");
 				game.printDealerCards();
 				System.out.println("");
 				game.dealer.updateScore();
 				game.printDealerScore();
-			//	System.out.println("Dealer score: " + game.dealer.getScore());
-
 				input.nextLine();
 				
 				//check for blackjack after cards dealt to player and dealer				
@@ -320,12 +309,12 @@ public class Game {
 				int dealerHitFlag = 0;
 				int playerCommandFlag = 0;	//1 if a player command is seen
 				boolean playerEndTurn = false;
-					//input.nextLine();
-				//	System.out.println("Enter file path: ");
-			//	filePath = input.nextLine();
+				input.nextLine();
+				System.out.println("Enter file path: ");
+				filePath = input.nextLine();
 				try {
-					f = new Scanner(new File("C:\\Users\\User\\Documents\\file.txt"));	
-					//f = new Scanner(new File(filePath));	//C:\\Users\\User\\assignment1\\file.txt
+					//f = new Scanner(new File("C:\\Users\\User\\Documents\\file.txt"));	
+					f = new Scanner(new File(filePath));	//C:\\Users\\User\\assignment1\\file.txt
 				while(f.hasNext()) {
 					fileContents.add(f.next());
 				}
