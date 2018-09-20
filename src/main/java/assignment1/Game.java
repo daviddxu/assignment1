@@ -205,8 +205,12 @@ public class Game {
 	
 	public int printPlayerScore() {
 		System.out.println("Player's score: " + player.getScore());
-
 		return player.getScore();	//for tester only
+	}
+	
+	public int printDealerScore() {
+		System.out.println("Dealer's score: " + dealer.getScore());
+		return dealer.getScore();
 	}
 		public static void main (String [] args) {
 			
@@ -227,17 +231,20 @@ public class Game {
 				game.dealToSelf();
 			
 				System.out.println("Player's cards: " );
-				for(int i = 0; i < game.getPlayerCardsSize(); i++) {
+			/*	for(int i = 0; i < game.getPlayerCardsSize(); i++) {
 					System.out.print(game.player.playerCards.get(i).getRank() + "" + game.player.playerCards.get(i).getSuit() + " ");
-				}
+				}*/
+				game.printPlayerCards();
 				game.player.updateScore();
 				System.out.println("");
-				System.out.println("Player's score: " + game.player.getScore());
+				game.printPlayerScore();
+			//	System.out.println("Player's score: " + game.player.getScore());
 				System.out.println("Dealer's cards: ");
 				game.printDealerCards();
 				System.out.println("");
 				game.dealer.updateScore();
-				System.out.println("Dealer score: " + game.dealer.getScore());
+				game.printDealerScore();
+			//	System.out.println("Dealer score: " + game.dealer.getScore());
 
 				input.nextLine();
 				
@@ -267,7 +274,8 @@ public class Game {
 						game.printPlayerCards();
 						System.out.println("");
 						game.player.updateScore();
-						System.out.println("Player's score: " + game.player.getScore());						
+						game.printPlayerScore();
+						win = game.winCheck();
 						/*TEMP*/
 						if(win == 1) {
 							break;
@@ -278,17 +286,17 @@ public class Game {
 						System.out.println("Player's cards: ");
 						game.printPlayerCards();
 						System.out.println("");
-						game.player.updateScore();						
-						System.out.println("Player's score: " + game.player.getScore());
-					}
-					
+						game.player.updateScore();		
+						game.printPlayerScore();
+						win = game.winCheck();
+					}					
 					/*Dealer's turn*/
 					game.dealer.flipCard();		 			
 					game.dealerPlay();
 					System.out.println("Dealer's cards: ");
 					game.printDealerCards();
 					System.out.println("");
-					System.out.println("Dealer score: " + game.dealer.getScore());					
+					game.printDealerScore();
 					win = game.winCheck();	//only check for win AFTER player and dealer have moved
 					/*TEMP*/
 					if(win == 1 ||win == 2) {
@@ -336,7 +344,7 @@ public class Game {
 							game.printPlayerCards();
 							System.out.println("");
 							game.player.updateScore();
-							System.out.println("Player's score: " + game.player.getScore());							
+							game.printPlayerScore();
 							if(game.blackJackTest() == 2) {
 								System.out.println("Player has a blackjack");
 								playerBlackJack = true;
@@ -352,7 +360,7 @@ public class Game {
 							System.out.println("");
 							game.dealer.flipCard();
 							game.dealer.updateScore();
-							System.out.println("Dealer's score: " + game.dealer.getScore());							
+							game.printDealerScore();
 							if(game.blackJackTest()==1 && dealerBlackJack == false) {
 								System.out.println("Dealer has a blackjack");
 								dealerBlackJack = true;
@@ -371,7 +379,7 @@ public class Game {
 						game.printPlayerCards();
 						System.out.println("");
 						game.player.updateScore();
-						System.out.println("Player's score: " + game.player.getScore());													
+						game.printPlayerScore();
 					}else if(fileContents.get(i).equals("S") || playerEndTurn == true) {	//player stands -> dealer autoplays with card at i+1 (unsafe)
 						playerEndTurn = true;
 						System.out.println("Player stands");
@@ -379,7 +387,7 @@ public class Game {
 						game.printPlayerCards();
 						System.out.println("");
 						game.player.updateScore();
-						System.out.println("Player's score: " + game.player.getScore());																		
+						game.printPlayerScore();
 						game.dealer.flipCard();
 						System.out.println("Dealer's cards: ");
 						game.printDealerCards();
@@ -392,14 +400,14 @@ public class Game {
 							game.printDealerCards();
 							System.out.println("");
 							game.dealer.updateScore();
-							System.out.println("Dealer's score: " + game.dealer.getScore());												
+							game.printDealerScore();
 						}else {
 							System.out.println("Dealer stands");
 							System.out.println("Dealer's cards");
 							game.printDealerCards();
 							System.out.println("");
 							game.dealer.updateScore();
-							System.out.println("Dealer's score: " + game.dealer.getScore());												
+							game.printDealerScore();
 						}
 					}																			
 				}				//endfor
